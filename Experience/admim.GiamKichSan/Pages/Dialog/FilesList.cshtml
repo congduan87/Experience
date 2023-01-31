@@ -1,6 +1,7 @@
 ﻿@page
 @model admim.GiamKichSan.Pages.Dialog.FilesListModel
 @{
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }
 <style>
     ul.custom-treelist, ul.custom-treelist li {
@@ -72,7 +73,7 @@
         <div class="x_title">
             <h2>Danh sách files</h2>
             <div class="nav navbar-right panel_toolbox">
-                <a class="btn btn-app clearfix">
+                <a class="btn btn-app clearfix" href="UpdateDirectory">
                     <i class="fa fa-edit"></i> Create Directory
                 </a>
                 <a class="btn btn-app clearfix">
