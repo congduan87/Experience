@@ -300,7 +300,13 @@
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12  ">
-                            @RenderBody()                            
+                            <div class="modal fade custPopupModal bd-example-modal-xl bd-example-modal-lg bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="popupModal" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-lg modal-sm" role="document">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
+                            </div>
+                            @RenderBody()
                         </div>
                     </div>
                 </div>
@@ -317,6 +323,7 @@
         </div>
     </div>
 
+
     <!-- jQuery -->
     <script src="~/template/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -331,6 +338,8 @@
     <!-- Custom Theme Scripts -->
     <script src="~/template/build/js/custom.min.js"></script>
     <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+    <script src="~/js/config.js"></script>
+    <script src="~/js/common.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

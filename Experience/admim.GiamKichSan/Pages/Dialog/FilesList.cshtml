@@ -7,16 +7,18 @@
     ul.custom-treelist, ul.custom-treelist li {
         list-style-type: none;
     }
+
     ul.custom-treelist {
         margin: 0;
         padding: 0;
     }
+
         ul.custom-treelist .caret {
             cursor: pointer;
             user-select: none; /* Prevent text selection */
         }
 
-        /* Create the caret/arrow with a unicode, and style it */
+            /* Create the caret/arrow with a unicode, and style it */
             ul.custom-treelist .caret::before {
                 content: "\25B6";
                 color: black;
@@ -24,17 +26,17 @@
                 margin-right: 6px;
             }
 
-    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+        /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
         ul.custom-treelist .caret-down::before {
             transform: rotate(90deg);
         }
 
-    /* Hide the nested list */
+        /* Hide the nested list */
         ul.custom-treelist .nested {
             display: none;
         }
 
-    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+        /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
         ul.custom-treelist .active {
             display: block;
         }
@@ -43,26 +45,25 @@
 <div class="col-xs-3 col-md-2">
     <ul class="x_panel custom-treelist">
         <li>
-            <span class="caret">Beverages</span>
+            <span class="caret">Danh sách thư mục</span>
             <ul class="nested">
-                <li>Water</li>
-                <li>Coffee</li>
-                <li>
-                    <span class="caret">Tea</span>
-                    <ul class="nested">
-                        <li>Black Tea</li>
-                        <li>White Tea</li>
-                        <li>
-                            <span class="caret">Green Tea</span>
-                            <ul class="nested">
-                                <li>Sencha</li>
-                                <li>Gyokuro</li>
-                                <li>Matcha</li>
-                                <li>Pi Lo Chun</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                @foreach (var item in Model.directories)
+                {
+                    @if (item.Parent.Count > 0)
+                    {
+                        <span class="caret">@item.Name</span>
+                        <ul class="nested">
+                            @foreach (var itemChild in item.Parent)
+                            {
+                                <li>@itemChild.Name</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <li>@item.Name</li>
+                    }
+                }
             </ul>
         </li>
     </ul>
@@ -73,10 +74,10 @@
         <div class="x_title">
             <h2>Danh sách files</h2>
             <div class="nav navbar-right panel_toolbox">
-                <a class="btn btn-app clearfix" href="UpdateDirectory">
+                <a class="btn btn-app clearfix create-directory">
                     <i class="fa fa-edit"></i> Create Directory
                 </a>
-                <a class="btn btn-app clearfix">
+                <a class="btn btn-app clearfix create-file" data-toggle="modal" data-target="#popupModal">
                     <i class="fa fa-play"></i> Create File
                 </a>
                 <a class="btn btn-app clearfix">
@@ -183,6 +184,8 @@
         </div>
     </div>
 </div>
+
+@section scripts{
     <script>
         var toggler = document.getElementsByClassName("caret");
         var i;
@@ -193,4 +196,19 @@
                 this.classList.toggle("caret-down");
             });
         }
+        let directory = $('.create-directory');
+        directory.on('click', function (event) {
+            common.baseApi.get('Dialog/UpdateDirectory').done(function (data) {
+                common.popupPattern.show(directory, data);
+                $('.save-directory').click(function () {
+                    common.baseApi.post('Dialog/FilesList', { 'name': 'duanvc' }).done(function (data) {
+                        console.log(data);
+                    });
+                });
+            });
+        });
+
     </script>
+
+
+}

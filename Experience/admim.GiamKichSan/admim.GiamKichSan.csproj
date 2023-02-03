@@ -273,4 +273,12 @@
     <None Include="wwwroot\template\vendors\parsleyjs\bower_components\uwidget\uwidget.less" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common.GiamKichSan\Common.GiamKichSan.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\filesImport\" />
+  </ItemGroup>
+
 </Project>
