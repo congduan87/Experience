@@ -3,65 +3,30 @@
 @{
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
-<style>
-    ul.custom-treelist, ul.custom-treelist li {
-        list-style-type: none;
-    }
-
-    ul.custom-treelist {
-        margin: 0;
-        padding: 0;
-    }
-
-        ul.custom-treelist .caret {
-            cursor: pointer;
-            user-select: none; /* Prevent text selection */
-        }
-
-            /* Create the caret/arrow with a unicode, and style it */
-            ul.custom-treelist .caret::before {
-                content: "\25B6";
-                color: black;
-                display: inline-block;
-                margin-right: 6px;
-            }
-
-        /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-        ul.custom-treelist .caret-down::before {
-            transform: rotate(90deg);
-        }
-
-        /* Hide the nested list */
-        ul.custom-treelist .nested {
-            display: none;
-        }
-
-        /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-        ul.custom-treelist .active {
-            display: block;
-        }
-</style>
+<link href="~/lib/directory-treelist/directory-treelist.css" rel="stylesheet" />
 
 <div class="col-xs-3 col-md-2">
-    <ul class="x_panel custom-treelist">
+    <ul class="directory-treelist">
         <li>
-            <span class="caret">Danh sách thư mục</span>
+            <span class="directory-caret">  <i class="fa fa-folder"></i> Danh sách thư mục</span>
             <ul class="nested">
                 @foreach (var item in Model.directories)
                 {
-                    @if (item.Parent.Count > 0)
+                @if (item.Parent.Count > 0)
                     {
-                        <span class="caret">@item.Name</span>
-                        <ul class="nested">
-                            @foreach (var itemChild in item.Parent)
+                <li>
+                    <span class="directory-caret">  <i class="fa fa-folder"></i> @item.Name</span>
+                    <ul class="nested">
+                        @foreach (var itemChild in item.Parent)
                             {
-                                <li>@itemChild.Name</li>
+                        <li>@itemChild.Name</li>
                             }
-                        </ul>
-                    }
-                    else
+                    </ul>
+                </li>
+                }
+                else
                     {
-                        <li>@item.Name</li>
+                <li>  <i class="fa fa-folder"></i> @item.Name</li>
                     }
                 }
             </ul>
@@ -186,16 +151,8 @@
 </div>
 
 @section scripts{
+    <script src="~/lib/directory-treelist/directory-treelist.js"></script>
     <script>
-        var toggler = document.getElementsByClassName("caret");
-        var i;
-
-        for (i = 0; i < toggler.length; i++) {
-            toggler[i].addEventListener("click", function () {
-                this.parentElement.querySelector(".nested").classList.toggle("active");
-                this.classList.toggle("caret-down");
-            });
-        }
         let directory = $('.create-directory');
         directory.on('click', function (event) {
             common.baseApi.get('Dialog/UpdateDirectory').done(function (data) {
