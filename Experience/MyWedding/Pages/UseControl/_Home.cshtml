@@ -1,0 +1,34 @@
+﻿@model MyWedding.Pages.IndexModel
+<div class="pt-page pt-page-1 pt-page-current">
+    <div class="container-fluid bg-main-image">
+        <div class=" blur-img bg-home" style="background-image: url('@Model.myWedding.Image');"></div>
+        <div class="page-fixed">
+            <div class="bg-main-image-overlay">
+                <div class="main-section-s2" style="display: flex;align-items: center;">
+                    <div class="inner-data">
+                        <div class="couple-name wow fadeInUp">
+                            <h1 class="wow fadeInLeft">@Model.myWedding.WeddingMale  </h1>
+                            <span class="fas fa-heart fa-fw" style="margin-right: 20px;"></span>
+                            <h1 class="wow fadeInRight">@Model.myWedding.WeddingFaMale</h1>
+                        </div>
+
+                        <div class="tag-line wow fadeInUp">
+                            <p><span>We’re getting married</span></p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="count-down-clock">
+                            <div id="clock" data-date="@Model.myWedding.StartDate" data-text-day="Ngày" data-text-hour="Giờ" data-text-minute="Phút" data-text-second="Giây"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col col-12">
+                                <div class="website_info_container text-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

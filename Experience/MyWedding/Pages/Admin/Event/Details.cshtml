@@ -1,0 +1,52 @@
+﻿@page
+@model MyWedding.Pages.Admin.Event.DetailsModel
+@{
+}
+<div>
+    <h4>Tổ chức sự kiện</h4>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.StartDate" class="control-label"></label>
+            <input class="form-control date" type="date" name="StartDate" value="@Convert.ToDateTime(Model.weddingEvent.StartDate).ToString("yyyy-MM-dd")">
+            <input class="form-control time" type="time" name="StartDateTime" value="@Convert.ToDateTime(Model.weddingEvent.StartDate).ToString("HH:mm")">
+            <span asp-validation-for="@Model.weddingEvent.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.Title" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Title" autocomplete="off">
+            <span asp-validation-for="@Model.weddingEvent.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.Address" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Address" autocomplete="off">
+            <span asp-validation-for="@Model.weddingEvent.Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.Latitude" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Latitude" autocomplete="off">
+            <span asp-validation-for="@Model.weddingEvent.Latitude" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.Longitude" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Longitude" autocomplete="off">
+            <span asp-validation-for="@Model.weddingEvent.Longitude" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.weddingEvent.Image" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Image">
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.weddingEvent.ID" class="btn btn-primary" />
+            <input type="hidden" asp-for="@Model.weddingEvent.IDWedding" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Event/Index">Về trang danh sách</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

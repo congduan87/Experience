@@ -1,0 +1,40 @@
+﻿@page
+@model MyWedding.Pages.Admin.Category.DetailsModel
+@{
+}
+<div>
+    <h4>Tổ chức sự kiện</h4>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingCategory.Code" class="control-label"></label>
+            <input asp-for="@Model.weddingCategory.Code" autocomplete="off" class="date form-control" type="date" required="required">
+            <span asp-validation-for="@Model.weddingCategory.Code" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingCategory.Name" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingCategory.Name" autocomplete="off">
+            <span asp-validation-for="@Model.weddingCategory.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingCategory.Path" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingCategory.Path" autocomplete="off">
+            <span asp-validation-for="@Model.weddingCategory.Path" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingCategory.IsHidden" class="control-label"></label>
+            <input type="checkbox" class="form-control" asp-for="@Model.weddingCategory.IsHidden">
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.weddingCategory.ID" class="btn btn-primary" />
+            <input type="hidden" asp-for="@Model.weddingCategory.IDWedding" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Category/Index">Về trang danh sách</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

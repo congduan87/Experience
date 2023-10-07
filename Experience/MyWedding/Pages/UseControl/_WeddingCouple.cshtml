@@ -1,0 +1,82 @@
+﻿@model MyWedding.Pages.IndexModel
+<div class="pt-page pt-page-2">
+    <div class="container-fluid display_none bg-main-image">
+        <div class="blur-img bg-couple" style="background-image: url('@Model.myWedding.Image');"></div>
+        <div class="page-scroll">
+            <div class="bg-main-image-overlay-2">
+                <div class="main-section-s2">
+                    <div class="col-md-12">
+                        <div class="page-title wow fadeInUp" data-class="fadeInUp">
+                            <h2>Cô dâu & Chú rể <span><i class="fas fa-heart"></i></span></h2>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 responsive-margin wow fadeInLeft couple-responsive-padding" data-class="fadeInLeft">
+                                    <div class="col-md-12 couple-responsive-padding">
+                                        <div class="the-couple bride-color text-center">
+                                            <div class="the-couple-title">
+                                                <p><span> Cô Dâu </span></p>
+                                            </div>
+                                            <div class="the-couple-img col-md-12 col-md-offset-0 col-xs-12">
+                                                <div class="person-image">
+                                                    <img src="@Model.weddingCoupleModel.FeMaleImage" alt="the-couple image" class="img-circle">
+                                                    <div class="the-couple-img-hover">
+                                                        <div class="social text-center">
+                                                            <a class="fb-color" href="@Model.weddingCoupleModel.FeMaleFacebookUrl" target="_blank"><i class="fa-facebook"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="the-couple-data">
+                                                <h3>@Model.weddingCoupleModel.FeMaleName</h3>
+                                                <div class="parent-infos">
+                                                    <div class="parent-info"><span class="parent-title">Con ông:</span> <span class="parent-name">@Model.weddingCoupleModel.FatherFeMaleName</span></div>
+
+                                                    <div class="parent-info"><span class="parent-title">Con bà:</span> <span class="parent-name">@Model.weddingCoupleModel.MotherFeMaleName</span></div>
+                                                </div>
+                                                <p class="about-the-couple">@Model.weddingCoupleModel.FeMaleDescription</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 wow fadeInRight responsive-margin couple-responsive-padding" data-class="fadeInRight">
+                                    <div class="col-md-12 couple-responsive-padding">
+                                        <div class="the-couple groom-color text-center">
+                                            <div class="the-couple-title">
+                                                <p><span> Chú rể </span></p>
+                                            </div>
+                                            <div class="the-couple-img col-md-12 col-md-offset-0 col-xs-12">
+                                                <div class="person-image">
+                                                    <img src="@Model.weddingCoupleModel.MaleImage"
+                                                         alt="the-couple image" class="img-circle">
+                                                    <div class="the-couple-img-hover">
+                                                        <div class="social text-center">
+
+                                                            <a class="fb-color" href="@Model.weddingCoupleModel.MaleFacebookUrl" target="_blank"><i class="fa-facebook"></i></a>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="the-couple-data">
+                                                <h3>@Model.weddingCoupleModel.MaleName</h3>
+                                                <div class="parent-infos">
+                                                    <div class="parent-info"><span class="parent-title">Con ông:</span> <span class="parent-name">@Model.weddingCoupleModel.FatherMaleName</span></div>
+
+                                                    <div class="parent-info"><span class="parent-title">Con bà:</span> <span class="parent-name">@Model.weddingCoupleModel.MotherMaleName</span></div>
+                                                </div>
+                                                <p class="about-the-couple">@Model.weddingCoupleModel.MaleDescription</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

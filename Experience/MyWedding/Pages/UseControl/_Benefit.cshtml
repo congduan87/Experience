@@ -1,0 +1,57 @@
+﻿@model MyWedding.Pages.IndexModel
+<div class="pt-page pt-page-9 donate-section">
+    <div class="container-fluid display_none bg-main-image">
+        <div class="blur-img bg-rsvp" style="background-image: url('@Model.myWedding.Image');"></div>
+        <div class="page-fixed">
+            <div class="bg-main-image-overlay-fixed donate-box">
+                <div class="main-section-s2">
+                    <div class="col-md-12">
+                        <div class="page-title wow fadeInUp" data-class="fadeInUp">
+                            <h2>Hộp mừng cưới<span><i class="fas fa-heart"></i></span></h2>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 wow fadeInLeft" data-class="fadeInLeft">
+                                    <div class="col-md-12 text-center couple-responsive-padding" style="margin: 50px 0;">
+                                        <div class="cat-title">
+                                            <p><span class="label label bride-color" style="letter-spacing: 2px;">Mừng cưới đến cô dâu</span></p>
+                                        </div>
+                                        <div class="the-people text-center donate-card">
+                                            <div class="qr-code">
+                                                <img class="qr-code-image" src="@Model.weddingCoupleModel.FeMaleImageBank" width="150" height="150">
+                                            </div>
+                                            <p>Ngân hàng: <strong>@Model.weddingCoupleModel.FeMaleNameBank</strong></p>
+                                            <p>Tên tài khoản: <strong>@Model.weddingCoupleModel.FeMaleName</strong></p>
+                                            <p>Số tài khoản: <strong>@Model.weddingCoupleModel.FeMaleIDBankCard</strong></p>
+                                            <p>Chi nhánh: <strong>@Model.weddingCoupleModel.FeMaleAddressBank</strong></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 wow fadeInRight pull-right" data-class="fadeInRight">
+                                    <div class="col-md-12 text-center couple-responsive-padding" style="margin: 50px 0;">
+                                        <div class="cat-title">
+                                            <p><span class="label label-default" style="letter-spacing: 2px;">Mừng cưới đến chú rể</span></p>
+                                        </div>
+                                        <div class="the-people text-center donate-card">
+                                            <div class="qr-code">
+                                                <img class="qr-code-image" src="@Model.weddingCoupleModel.MaleImageBank" width="150" height="150">
+                                            </div>
+                                            <p>Ngân hàng: <strong>@Model.weddingCoupleModel.MaleNameBank</strong></p>
+                                            <p>Tên tài khoản: <strong>@Model.weddingCoupleModel.MaleName</strong></p>
+                                            <p>Số tài khoản: <strong>@Model.weddingCoupleModel.MaleIDBankCard</strong></p>
+                                            <p>Chi nhánh: <strong>@Model.weddingCoupleModel.MaleAddressBank</strong></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
