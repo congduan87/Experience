@@ -31,6 +31,7 @@ namespace MyWedding.Data
         public DbSet<Blog> blogs { get; set; }
         public DbSet<Event> events { get; set; }
         public DbSet<FileUpload> fileUploads { get; set; }
+        public DbSet<WeddingVideo> weddingVideos { get; set; }
         public DbSet<Category> categories { get; set; }
     }
 }

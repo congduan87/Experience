@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +8,6 @@ using Microsoft.Extensions.Hosting;
 using MyWedding.Common;
 using MyWedding.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyWedding
 {
@@ -34,9 +29,10 @@ namespace MyWedding
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
             // Truy cập IdentityOptions
-            services.Configure<IdentityOptions>(options => {
+            services.Configure<IdentityOptions>(options =>
+            {
                 // Thiết lập về Password
                 options.Password.RequireDigit = false; // Không bắt phải có số
                 options.Password.RequireLowercase = false; // Không bắt phải có chữ thường
@@ -61,7 +57,8 @@ namespace MyWedding
 
             });
 
-            services.AddRazorPages().AddRazorPagesOptions(options => {
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
                 options.Conventions.AddAreaPageRoute(
                     areaName: "Identity",
                     pageName: "/Account/Register",
@@ -112,6 +109,13 @@ namespace MyWedding
                     {
                         context.Response.Redirect("/wedding");
                     }
+                });
+                endpoints.MapPost("/ChucMung/Index", async context =>
+                {
+                    var suggestionTitle = Convert.ToString(context.Request.Form["SuggestionTitle"]);
+                    var suggestionContent = Convert.ToString(context.Request.Form["SuggestionContent"]);
+
+                    context.Response.Redirect($"/Admin/Suggestion/Index?SuggestionTitle={suggestionTitle}&SuggestionContent={suggestionContent}&handler=Update");
                 });
             });
         }

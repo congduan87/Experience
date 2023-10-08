@@ -11,7 +11,6 @@ using MyWedding.Data;
 
 namespace MyWedding.Pages.Admin
 {
-    [AllowAnonymous]
     public class IndexModel : CustPageModel
     {
         private readonly ILogger<IndexModel> _logger;

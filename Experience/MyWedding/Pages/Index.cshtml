@@ -4,19 +4,10 @@
     @Html.RenderPartialAsync("UseControl/_Home.cshtml")
     @Html.RenderPartialAsync("UseControl/_WeddingCouple.cshtml")
     @Html.RenderPartialAsync("UseControl/_Blog.cshtml")
-    <div class="pt-page pt-page-4"></div>
+    @Html.RenderPartialAsync("UseControl/_VideoWedding.cshtml")
     @Html.RenderPartialAsync("UseControl/_Event.cshtml")
     @Html.RenderPartialAsync("UseControl/_Album.cshtml")
     <div class="pt-page pt-page-7"></div>
     @Html.RenderPartialAsync("UseControl/_Suggestion.cshtml")
     @Html.RenderPartialAsync("UseControl/_Benefit.cshtml")
 </div>
-@section scripts {
-    <script>
-        $(".btnSuggestion").on("click", function (e) {
-            let SuggestionTitle = '';
-            let SuggestionContent = '';
-        });
-    </script>
-
-}

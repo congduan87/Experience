@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyWedding.Data
 {
@@ -19,9 +16,6 @@ namespace MyWedding.Data
         [MaxLength(22)]
         [Display(Name = "Ngày cưới")]
         public string StartDate { get; set; }
-        [MaxLength(500)]
-        [Display(Name = "Ảnh background")]
-        public string Image { get; set; }
         [MaxLength(256)]
         public string UserName { get; set; }
         [MaxLength(500)]
@@ -33,6 +27,30 @@ namespace MyWedding.Data
         [MaxLength(500)]
         [Display(Name = "Trang web cưới")]
         public string Url { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background")]
+        public string Image { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background cặp đôi")]
+        public string ImageCouple { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background blog")]
+        public string ImageBlog { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background album cưới")]
+        public string ImageAlbum { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background video cưới")]
+        public string ImageVideo { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background sự kiện")]
+        public string ImageEvent { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background suggestion")]
+        public string ImageSuggestion { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background mừng cưới")]
+        public string ImageBenefit { get; set; }
     }
 
     [Table(name: "WeddingHappy_WeddingCouple")]
@@ -116,6 +134,9 @@ namespace MyWedding.Data
         [MaxLength(500)]
         [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Địa chỉ bản đồ")]
+        public string MapAddress { get; set; }
         [MaxLength(20)]
         [Display(Name = "Kinh độ")]
         public string Latitude { get; set; }
@@ -141,6 +162,28 @@ namespace MyWedding.Data
         [Display(Name = "Tên ảnh upload")]
         public string Name { get; set; }
         [MaxLength(500)]
+        public string Path { get; set; }
+        [MaxLength(22)]
+        public string DateUpload { get; set; }
+        [Display(Name = "Ẩn")]
+        public bool IsHidden { get; set; }
+    }
+
+    [Table(name: "WeddingHappy_WeddingVideo")]
+    public class WeddingVideo
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 ID { get; set; }
+        public Int64 IDWedding { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Tiêu đề video")]
+        public string Title { get; set; }
+        [MaxLength(2000)]
+        [Display(Name = "Nội dung video")]
+        public string Content { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Đường dẫn file Video")]
         public string Path { get; set; }
         [MaxLength(22)]
         public string DateUpload { get; set; }

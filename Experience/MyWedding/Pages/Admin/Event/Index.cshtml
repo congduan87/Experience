@@ -18,10 +18,7 @@
                 Địa chỉ tổ chức
             </th>
             <th>
-                Kinh độ
-            </th>
-            <th>
-                Vĩ Độ
+                Địa chỉ bản đồ
             </th>
             <th>
                 Hình ảnh
@@ -43,10 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
+                @Html.DisplayFor(modelItem => item.MapAddress)
             </td>
             <td>
                 <img title="@item.Title" src="@item.Image" width="200" height="200" />

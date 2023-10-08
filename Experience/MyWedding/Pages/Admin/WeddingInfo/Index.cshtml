@@ -18,11 +18,7 @@
                     <label asp-for="@Model.weddingInfo.StartDate" class="control-label"></label>
                     <input name="StartDate" value="@Model.weddingInfo.StartDate" autocomplete="off" class="date form-control" type="date" required="required">
                     <span asp-validation-for="@Model.weddingInfo.StartDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.weddingInfo.Image" class="control-label"></label>
-                    <input type="text" class="form-control" name="Image" required="" value="@Model.weddingInfo.Image" autocomplete="off">
-                </div>
+                </div>                
                 <div class="form-group">
                     <label asp-for="@Model.weddingInfo.WeddingMale" class="control-label"></label>
                     <input type="text" class="form-control" name="WeddingMale" required="" value="@Model.weddingInfo.WeddingMale" autocomplete="off">

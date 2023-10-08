@@ -22,16 +22,11 @@
             <label asp-for="@Model.weddingEvent.Address" class="control-label"></label>
             <input type="text" class="form-control" asp-for="@Model.weddingEvent.Address" autocomplete="off">
             <span asp-validation-for="@Model.weddingEvent.Address" class="text-danger"></span>
-        </div>
+        </div>       
         <div class="form-group">
-            <label asp-for="@Model.weddingEvent.Latitude" class="control-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Latitude" autocomplete="off">
-            <span asp-validation-for="@Model.weddingEvent.Latitude" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.weddingEvent.Longitude" class="control-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.weddingEvent.Longitude" autocomplete="off">
-            <span asp-validation-for="@Model.weddingEvent.Longitude" class="text-danger"></span>
+            <label asp-for="@Model.weddingEvent.MapAddress" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingEvent.MapAddress" autocomplete="off">
+            <span asp-validation-for="@Model.weddingEvent.MapAddress" class="text-danger"></span>
         </div>
 
         <div class="form-group">

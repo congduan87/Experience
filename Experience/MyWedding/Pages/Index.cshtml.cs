@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MyWedding.Common;
 using MyWedding.Data;
 using MyWedding.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyWedding.Pages
 {
@@ -22,6 +18,7 @@ namespace MyWedding.Pages
         public WeddingCoupleModel weddingCoupleModel { get; set; }
         public List<Data.Blog> blogs { get; set; }
         public List<Data.FileUpload> albums { get; set; }
+        public List<Data.WeddingVideo> videos { get; set; }
         public List<Data.Event> events { get; set; }
         public List<Data.Suggestion> suggestions { get; set; }
         public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
@@ -35,7 +32,15 @@ namespace MyWedding.Pages
             //MyWedding
             myWedding = _context.weddings.Where(x => x.Url.Contains("giamkichsan.com")).FirstOrDefault() ?? new Wedding();//Request.Host.Value
             if (myWedding == null || myWedding.ID == 0) return;
+            VariableGlobal.IDWeddingGuest = myWedding.ID;
             myWedding.Image = Helper.GetPathImage(myWedding.Image);
+            myWedding.ImageCouple = Helper.GetPathImage(myWedding.ImageCouple);
+            myWedding.ImageBlog = Helper.GetPathImage(myWedding.ImageBlog);
+            myWedding.ImageAlbum = Helper.GetPathImage(myWedding.ImageAlbum);
+            myWedding.ImageVideo = Helper.GetPathImage(myWedding.ImageVideo);
+            myWedding.ImageEvent = Helper.GetPathImage(myWedding.ImageEvent);
+            myWedding.ImageSuggestion = Helper.GetPathImage(myWedding.ImageSuggestion);
+            myWedding.ImageBenefit = Helper.GetPathImage(myWedding.ImageBenefit);
 
             //Wedding Coupble
             weddingCoupleModel = _context.weddingCouples.Where(x => x.IDWedding == myWedding.ID).ToList().Change();
@@ -44,7 +49,7 @@ namespace MyWedding.Pages
             weddingCoupleModel.FeMaleImage = Helper.GetPathImage(weddingCoupleModel.FeMaleImage);
             weddingCoupleModel.FeMaleImageBank = Helper.GetPathImage(weddingCoupleModel.FeMaleImageBank);
             FirstMale = weddingCoupleModel.MaleName.Split(' ')?.Last()?.Substring(0, 1)?.ToUpper();
-            FirstFeMale = weddingCoupleModel.FatherMaleName.Split(' ')?.Last()?.Substring(0, 1)?.ToUpper();
+            FirstFeMale = weddingCoupleModel.FeMaleName.Split(' ')?.Last()?.Substring(0, 1)?.ToUpper();
 
             //Blog
             blogs = _context.blogs.Where(x => x.IDWedding == myWedding.ID && !x.IsHidden).ToList();
@@ -69,6 +74,9 @@ namespace MyWedding.Pages
 
             //suggestions
             suggestions = _context.suggestions.Where(x => x.IDWedding == myWedding.ID && !x.IsHidden).ToList() ?? new List<Data.Suggestion>();
+
+            //videos
+            videos = _context.weddingVideos.Where(x => x.IDWedding == myWedding.ID).ToList() ?? new List<Data.WeddingVideo>();
         }
     }
 }

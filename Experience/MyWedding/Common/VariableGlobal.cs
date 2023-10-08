@@ -11,5 +11,6 @@ namespace MyWedding.Common
     {
         public static string ContentRoot { get; set; }
         public static long IDWedding { get; set; }
+        public static long IDWeddingGuest { get; set; }
     }
 }

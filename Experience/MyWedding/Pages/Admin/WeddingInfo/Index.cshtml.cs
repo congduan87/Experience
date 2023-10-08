@@ -31,7 +31,6 @@ namespace MyWedding.Pages.Admin.WeddingInfo
                     wedding.Url = weddingInfo.Url;
                     wedding.WeddingFaMale = weddingInfo.WeddingFaMale;
                     wedding.WeddingMale = weddingInfo.WeddingMale;
-                    wedding.Image = weddingInfo.Image;
                     if (wedding.ID == 0)
                     {
                         _context.weddings.Add(wedding);
