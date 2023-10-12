@@ -30,10 +30,11 @@ namespace MyWedding.Pages
         public void OnGet()
         {
             //MyWedding
-            myWedding = _context.weddings.Where(x => x.Url.Contains("giamkichsan.com")).FirstOrDefault() ?? new Wedding();//Request.Host.Value
+            myWedding = _context.weddings.Where(x => x.Url.Contains(Request.Host.Value)).FirstOrDefault() ?? new Wedding();//Request.Host.Value
             if (myWedding == null || myWedding.ID == 0) return;
             VariableGlobal.IDWeddingGuest = myWedding.ID;
             myWedding.Image = Helper.GetPathImage(myWedding.Image);
+            myWedding.ImageHome = Helper.GetPathImage(myWedding.ImageHome);
             myWedding.ImageCouple = Helper.GetPathImage(myWedding.ImageCouple);
             myWedding.ImageBlog = Helper.GetPathImage(myWedding.ImageBlog);
             myWedding.ImageAlbum = Helper.GetPathImage(myWedding.ImageAlbum);

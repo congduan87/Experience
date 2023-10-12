@@ -34,6 +34,7 @@ namespace MyWedding.Pages.Admin.WeddingInfo
                         if (temp != null)
                         {
                             temp.Image = wedding.Image;
+                            temp.ImageHome = wedding.ImageHome;
                             temp.ImageCouple = wedding.ImageCouple;
                             temp.ImageBlog = wedding.ImageBlog;
                             temp.ImageAlbum = wedding.ImageAlbum;

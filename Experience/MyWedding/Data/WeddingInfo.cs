@@ -28,8 +28,11 @@ namespace MyWedding.Data
         [Display(Name = "Trang web cưới")]
         public string Url { get; set; }
         [MaxLength(500)]
-        [Display(Name = "Ảnh background")]
+        [Display(Name = "Ảnh SEO")]
         public string Image { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Ảnh background Home")]
+        public string ImageHome { get; set; }
         [MaxLength(500)]
         [Display(Name = "Ảnh background cặp đôi")]
         public string ImageCouple { get; set; }

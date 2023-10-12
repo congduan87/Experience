@@ -99,17 +99,17 @@ namespace MyWedding
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapGet("/", async context =>
-                {
-                    if (!string.IsNullOrEmpty(context.User.Identity.Name))
-                    {
-                        context.Response.Redirect("/admin");
-                    }
-                    else
-                    {
-                        context.Response.Redirect("/wedding");
-                    }
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    if (!string.IsNullOrEmpty(context.User.Identity.Name))
+                //    {
+                //        context.Response.Redirect("/admin");
+                //    }
+                //    else
+                //    {
+                //        context.Response.Redirect("/wedding");
+                //    }
+                //});
                 endpoints.MapPost("/ChucMung/Index", async context =>
                 {
                     var suggestionTitle = Convert.ToString(context.Request.Form["SuggestionTitle"]);
