@@ -1,7 +1,7 @@
 ﻿@model MyWedding.Pages.IndexModel
 <div class="pt-page pt-page-5">
     <div class="container-fluid display_none bg-main-image">
-        <div class="blur-img bg-wedding" style="background-image: url('@Model.myWedding.ImageEvent');"></div>
+        <div class="blur-img bg-wedding menu-background-image" data-image="@Model.myWedding.ImageEvent" style="background-image: url('@Model.myWedding.ImageHome');"></div>
         <div class="page-fixed">
             <div class="bg-main-image-overlay-fixed">
                 <div class="main-section-s2">
@@ -20,7 +20,7 @@
                                 {
                                     <div class="white-box ceremony-detail">
                                         <ul style="list-style-type:none">
-                                            <li class="text-center"><img src="@item.Image" alt="@item.Title" width="250" style="aspect-ratio: 3/4"></li>
+                                            <li class="text-center"><img class="image-waiting" data-image="@item.Image" alt="@item.Title" width="250" style="aspect-ratio: 3/4"></li>
                                             <li class="text-center"><h5>@item.Title.ToUpper()</h5></li>
                                             <li class="text-center"><i class="fas fa-clock"></i> @Convert.ToDateTime(item.StartDate).ToString("HH:mm dd/MM/yyyy")</li>
                                             <li class="text-center"><img class="pin-icon" src="wedding/images/pin.png" alt="locationimage"></li>

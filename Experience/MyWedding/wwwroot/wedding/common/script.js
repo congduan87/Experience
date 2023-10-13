@@ -498,3 +498,19 @@ $(".btnSuggestion").on("click", function (e) {
     });
     saveData.error(function () { console.log("Something went wrong"); });
 });
+$(document).ready(function () {
+    $('.menu-background-image').each(function (index) {
+        var urlImage = this.getAttribute("data-image");
+        if (urlImage != null && urlImage != '') {
+            this.setAttribute("style", "background-image: url('" + this.getAttribute("data-image") + "');");
+        }
+    });
+
+    $('.image-waiting').each(function (index) {
+        var urlImage = this.getAttribute("data-image");
+        if (urlImage != null && urlImage != '') {
+            this.setAttribute("src", this.getAttribute("data-image"));
+        }
+    });
+
+});
