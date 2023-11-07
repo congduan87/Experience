@@ -11,6 +11,19 @@
                         </div>
                         <div class="container">
                             <div class="row">
+                                <div class="col-12 col-lg-8 col-md-8">
+                                    <div class="wish-box wow fadeInUp mysuggestions" data-class="fadeInUp">
+                                        @{
+                                            foreach (var item in Model.suggestions)
+                                            {
+                                                <div class="wish-box-item ">
+                                                    <strong>@item.Title</strong>
+                                                    <p class="text-left">@item.Content</p>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
                                 <div class="col-12 col-lg-4 col-md-4">
                                     <div class="rsvp">
                                         <div class="rsvp-form white-box wow fadeInUp" data-class="fadeInUp" style="width: 100%;">
@@ -34,19 +47,6 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-8 col-md-8">
-                                    <div class="wish-box wow fadeInUp mysuggestions" data-class="fadeInUp">
-                                        @{
-                                            foreach (var item in Model.suggestions)
-                                            {
-                                                <div class="wish-box-item ">
-                                                    <strong>@item.Title</strong>
-                                                    <p class="text-left">@item.Content</p>
-                                                </div>
-                                            }
-                                        }
                                     </div>
                                 </div>
                             </div>

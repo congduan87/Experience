@@ -15,7 +15,10 @@ namespace MyWedding.Common
         }
         public static string GetPathImage(string fileName = "")
         {
-            return "/" + Path.Combine("uploads", "images", fileName??"").Replace("\\", "/");
+            if (string.IsNullOrEmpty(fileName))
+                return fileName;
+            else
+                return "/" + Path.Combine("uploads", "images", fileName ?? "").Replace("\\", "/");
         }
     }
 }

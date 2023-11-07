@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWedding.API;
 using MyWedding.Common;
 using MyWedding.Data;
 using System;
@@ -110,13 +111,8 @@ namespace MyWedding
                 //        context.Response.Redirect("/wedding");
                 //    }
                 //});
-                endpoints.MapPost("/ChucMung/Index", async context =>
-                {
-                    var suggestionTitle = Convert.ToString(context.Request.Form["SuggestionTitle"]);
-                    var suggestionContent = Convert.ToString(context.Request.Form["SuggestionContent"]);
-
-                    context.Response.Redirect($"/Admin/Suggestion/Index?SuggestionTitle={suggestionTitle}&SuggestionContent={suggestionContent}&handler=Update");
-                });
+                endpoints.SendMessage();
+                endpoints.InsertGuestConnect();
             });
         }
     }

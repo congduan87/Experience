@@ -16,6 +16,7 @@ namespace MyWedding.Common
                 DateUpload = x.DateUpload,
                 Path = x.Path,
                 IsHidden = x.IsHidden,
+                OrderIndex = x.OrderIndex,
                 FullPath = Helper.GetPathImage(x.Path)
             };
         }

@@ -152,6 +152,8 @@ namespace MyWedding.Data
         [MaxLength(500)]
         [Display(Name = "Địa chỉ tổ chức")]
         public string Address { get; set; }
+        [Display(Name = "Số thứ tự")]
+        public Int32 OrderIndex { get; set; }
     }
 
     [Table(name: "WeddingHappy_FileUpload")]
@@ -170,6 +172,8 @@ namespace MyWedding.Data
         public string DateUpload { get; set; }
         [Display(Name = "Ẩn")]
         public bool IsHidden { get; set; }
+        [Display(Name = "Số thứ tự")]
+        public Int32 OrderIndex { get; set; }
     }
 
     [Table(name: "WeddingHappy_WeddingVideo")]
@@ -214,5 +218,23 @@ namespace MyWedding.Data
         public bool IsHidden { get; set; }
     }
 
-
+    [Table(name: "WeddingHappy_GuestConnect")]
+    public class GuestConnect
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 ID { get; set; }
+        public Int64 IDWedding { get; set; }
+        [MaxLength(256)]
+        [Display(Name = "Mã kết nối")]
+        public string Token { get; set; }
+        [MaxLength(10)]
+        [Display(Name = "RemotePort")]
+        public string RemotePort { get; set; }
+        [MaxLength(20)]
+        [Display(Name = "RemoteIpAddress")]
+        public string RemoteIpAddress { get; set; }
+        [MaxLength(22)]
+        public string DateConnect { get; set; }
+    }
 }

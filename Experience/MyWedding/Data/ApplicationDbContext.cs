@@ -33,5 +33,6 @@ namespace MyWedding.Data
         public DbSet<FileUpload> fileUploads { get; set; }
         public DbSet<WeddingVideo> weddingVideos { get; set; }
         public DbSet<Category> categories { get; set; }
+        public DbSet<GuestConnect> guestConnects { get; set; }
     }
 }

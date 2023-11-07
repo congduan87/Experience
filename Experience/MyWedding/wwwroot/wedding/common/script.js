@@ -4,6 +4,7 @@ if (/Edge/.test(navigator.userAgent)) {
    $('.nav > li').css('width','120px');
 }
 */
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 $(document).on('ready', function () {
     'use strict';
     //Vertical icon-menu active script
@@ -22,27 +23,44 @@ $(document).on('ready', function () {
     });
 
     setTimeout(function () {
+        let fnNexPagination = function () {
+            let nextMenu = $('ul.dl-menu li.hover_active').next('li');
+            if (nextMenu.length <= 0) { return false };
+            nextMenu.click();
+            resetPagination();
+        };
+        let fnPreviousPagination = function () {
+            let previousMenu = $('ul.dl-menu li.hover_active').prev('li');
+            if (previousMenu.length <= 0) { return false };
+            previousMenu.click();
+            resetPagination();
+        };
         $('.pagination-button').css({
             'display': 'flex',
             'bottom': $(".bii-player").css('bottom'),
             'right': $(".bii-player").css('left'),
         });
-
         $(".pagination-button .pa-previous").click(function () {
-            let previousMenu = $('ul.dl-menu li.hover_active').prev('li');
-
-            if (previousMenu.length <= 0) { return false };
-            previousMenu.click();
-            resetPagination();
-
+            fnPreviousPagination();
         });
 
         $(".pagination-button .pa-next").click(function () {
-            let nextMenu = $('ul.dl-menu li.hover_active').next('li');
-            if (nextMenu.length <= 0) { return false };
-            nextMenu.click();
-            resetPagination();
-
+            fnNexPagination();
+        });
+        $("#pt-main").on("touchstart", function (event) {
+            let xClick = event.originalEvent.touches[0].pageX;
+            $(this).one("touchmove", function (event) {
+                var xMove = event.originalEvent.touches[0].pageX;
+                if (Math.floor(xClick - xMove) > 9) {
+                    fnNexPagination();
+                }
+                else if (Math.floor(xClick - xMove) < -9) {
+                    fnPreviousPagination();
+                }
+            });
+            $("#pt-main").on("touchend", function () {
+                $(this).off("touchmove");
+            });
         });
     }, 1300);
 
@@ -497,4 +515,19 @@ $(".btnSuggestion").on("click", function (e) {
         }
     });
     saveData.error(function () { console.log("Something went wrong"); });
+});
+
+$(document).ready(function () {
+    let KEY = 'guest-connect';
+    let token = localStorage.getItem(KEY);
+    if (token == null || token == '') {
+        $.ajax({
+            type: 'POST',
+            url: "/GuestConnect/Index",
+            dataType: "text",
+            success: function (resultData) {
+                localStorage.setItem(KEY, resultData);
+            }
+        });
+    }
 });
