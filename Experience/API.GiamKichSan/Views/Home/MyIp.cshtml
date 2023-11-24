@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div style="text-align:center" class="my-ip-address display-4"></div>
+    <script src="~/assets/plugin/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/MyIPs/HomeAddress",
+                type: 'GET',
+                data: null,
+            }).done((data) => {
+                if (data != null && data.listObj != null) {
+                    for (var i = 0; i < data.listObj.length; i++) {
+                        if (data.listObj[i].isActive == true) {
+                            $(".my-ip-address").text(data.listObj[i].ipAddress);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

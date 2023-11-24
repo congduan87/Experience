@@ -1,0 +1,217 @@
+﻿* {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    background-color: #ffff;
+    color: #9b9b9b;
+    font-family: Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+    .clearfix:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+    }
+
+button {
+    background-color: #0cb8b6;
+    border: 1px solid #0cb8b6;
+    color: #fff;
+    cursor: pointer;
+    min-width: 135px;
+    padding: 11px 10px;
+    text-align: center;
+    transition: 0.3s background-color;
+}
+
+    button:hover {
+        background-color: #18ccca;
+    }
+
+/*------------Danh mục---------------------------*/
+.upload-file {
+    background-color: #f2f3f5;
+    margin: 30px auto;
+    padding: 20px 30px;
+    width: 1145px;
+    border-radius: 10px;
+}
+
+    .upload-file .title {
+        color: #1f1f1f;
+        font-size: 42px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .upload-file ul.sub-title li {
+        float: right;
+        margin-left: 10px;
+    }
+
+        .upload-file ul.sub-title li:first-child {
+            float: left;
+        }
+
+    .upload-file .lead-text {
+        font-size: 19px;
+        margin-bottom: 40px;
+    }
+
+
+    /*------------Tree-View---------------------------*/
+    .upload-file .tree-view {
+        float: left;
+        margin-bottom: 20px;
+        width: 350px;
+    }
+
+        .upload-file .tree-view ul li {
+            color: black;
+            transition: 0.3s background-color;
+        }
+
+            .upload-file .tree-view ul li:hover {
+                color: #18ccca;
+            }
+
+            .upload-file .tree-view ul li.active {
+                color: #18ccca;
+            }
+
+        .upload-file .tree-view li.collapse>ul {
+            display: none;
+        }
+
+        .upload-file .tree-view li.collapse::before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            content: "\f151";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 23px;
+        }
+
+        .upload-file .tree-view li.expand>ul {
+            display: block;
+        }
+
+        .upload-file .tree-view li.expand::before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            content: "\f150";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 23px;
+        }
+
+    /*------------Tree-View---------------------------*/
+    .upload-file .file-upload-list {
+        width: auto;
+    }
+
+        .upload-file .file-upload-list ul {
+            height: 500px;
+            overflow: auto;
+        }
+
+        .upload-file .file-upload-list li {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            float: left;
+            border-bottom: 1px dashed #ffb737;
+            margin-right: 25px;
+        }
+
+            .upload-file .file-upload-list li::before {
+                visibility: hidden;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                line-height: 1;
+                content: "\f00c";
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                font-size: 25px;
+                color: seagreen;
+            }
+
+            .upload-file .file-upload-list li.active::before {
+                visibility: visible;
+            }
+
+            .upload-file .file-upload-list li .image {
+                width: 200px;
+                height: auto;
+            }
+
+                .upload-file .file-upload-list li .image img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+            .upload-file .file-upload-list li .detail {
+                color: #1f1f1f;
+                font-size: 15px;
+                text-transform: lowercase;
+                font-style: italic;
+            }
+
+
+
+/*------------Context Menu---------------------------*/
+.context-menu {
+    position: absolute;
+    text-align: center;
+    background: lightgray;
+    border: 1px solid black;
+}
+
+    .context-menu ul {
+        padding: 0px;
+        margin: 0px;
+        min-width: 150px;
+        list-style: none;
+    }
+
+        .context-menu ul li {
+            padding-bottom: 7px;
+            padding-top: 7px;
+            border: 1px solid black;
+        }
+
+            .context-menu ul li a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .context-menu ul li:hover {
+                background: darkgray;
+            }
