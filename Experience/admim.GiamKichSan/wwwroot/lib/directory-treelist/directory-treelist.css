@@ -1,0 +1,54 @@
+﻿/*------------DIRECTORY TREELIST-----------------START*/
+ul.directory-treelist, ul.directory-treelist li {
+    list-style-type: none;
+}
+
+ul.directory-treelist {
+    margin: 0;
+    padding: 0;
+}
+
+    ul.directory-treelist .directory-caret {
+        cursor: pointer;
+        user-select: none; /* Prevent text selection */
+    }
+        /* Create the caret/arrow with a unicode, and style it */
+        ul.directory-treelist .directory-caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+    ul.directory-treelist .caret-down::before {
+        transform: rotate(90deg);
+    }
+    /* Hide the nested list */
+    ul.directory-treelist .nested {
+        display: none;
+    }
+    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+    ul.directory-treelist .active {
+        display: block;
+    }
+/*------------DIRECTORY TREELIST-----------------END*/
+
+
+/*<ul class="directory-treelist">
+    <li>
+        <span class="directory-caret">  <i class="fa fa-folder"></i> Danh sách thư mục</span>
+        <ul class="nested">
+            <li>
+                <span class="directory-caret">  <i class="fa fa-folder"></i> Name00</span>
+                <ul class="nested">
+                    <li>@itemChild.Name</li>
+                </ul>
+            </li>
+            <li>  <i class="fa fa-folder"></i> Name1</li>
+             <li>  <i class="fa fa-folder"></i> Name2</li>
+             <li>  <i class="fa fa-folder"></i> Name3</li>
+             <li>  <i class="fa fa-folder"></i> .Name4</li>
+        </ul>
+    </li>
+</ul>*/

@@ -1,0 +1,171 @@
+﻿@page
+@model admim.GiamKichSan.Pages.Dialog.FilesListModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+<link href="~/lib/directory-treelist/directory-treelist.css" rel="stylesheet" />
+
+<div class="col-xs-3 col-md-2">
+    <ul class="directory-treelist">
+        <li>
+            <span class="directory-caret">  <i class="fa fa-folder"></i> Danh sách thư mục</span>
+            <ul class="nested">
+                @foreach (var item in Model.directories)
+                {
+                @if (item.Parent.Count > 0)
+                    {
+                <li>
+                    <span class="directory-caret">  <i class="fa fa-folder"></i> @item.Name</span>
+                    <ul class="nested">
+                        @foreach (var itemChild in item.Parent)
+                            {
+                        <li>@itemChild.Name</li>
+                            }
+                    </ul>
+                </li>
+                }
+                else
+                    {
+                <li>  <i class="fa fa-folder"></i> @item.Name</li>
+                    }
+                }
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="col-xs-9 col-md-10">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Danh sách files</h2>
+            <div class="nav navbar-right panel_toolbox">
+                <a class="btn btn-app clearfix create-directory">
+                    <i class="fa fa-edit"></i> Create Directory
+                </a>
+                <a class="btn btn-app clearfix create-file" data-toggle="modal" data-target="#popupModal">
+                    <i class="fa fa-play"></i> Create File
+                </a>
+                <a class="btn btn-app clearfix">
+                    <i class="fa fa-save"></i> Save
+                </a>
+                <a class="btn btn-app clearfix">
+                    <span class="badge bg-red">6</span>
+                    <i class="fa fa-bullhorn"></i> Notifications
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a href="~/template/production/images/picture.jpg" target="_blank">
+                            <img src="~/template/production/images/picture.jpg" class="img-rounded" alt="Lights" style="width: 150px; height: 150px">
+                            <p>Lorem ipsum donec</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/directory-treelist/directory-treelist.js"></script>
+    <script>
+        let directory = $('.create-directory');
+        directory.on('click', function (event) {
+            common.baseApi.get('Dialog/UpdateDirectory').done(function (data) {
+                common.popupPattern.show(directory, data);
+                $('.save-directory').click(function () {
+                    common.baseApi.post('Dialog/FilesList', { 'name': 'duanvc' }).done(function (data) {
+                        console.log(data);
+                    });
+                });
+            });
+        });
+
+    </script>
+
+
+}
