@@ -10,8 +10,8 @@ namespace Model.GiamKichSan.Models
     public class BaseCUD_Entity: Base_Entity
     {
         [StringLength(1)]
-        public int IsActive { get; set; }
+        public string IsActive { get; set; }
         [StringLength(1)]
-        public int IsDelete { get; set; }
+        public string IsDelete { get; set; }
     }
 }

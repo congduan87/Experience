@@ -647,9 +647,10 @@ namespace Model.GiamKichSan.Common.SQL
                 string clause = string.Empty;
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
 
-                clause = conditions.Body.GetKeyValue(parameters, paramPrefix);
+                if(conditions != null)
+                clause = " WHERE " + conditions.Body.GetKeyValue(parameters, paramPrefix);
 
-                string commandText = "SELECT * FROM " + tableName + " WHERE " + clause + " \n " + string.Format(_SkipTake, orderby, pageSize * pageIndex, pageSize * (pageIndex + 1));
+                string commandText = "SELECT * FROM " + tableName + clause + " \n " + string.Format(_SkipTake, orderby, pageSize * pageIndex, pageSize * (pageIndex + 1));
 
                 output.listObj = GetDataTable(commandText, parameters)?.ToList<T>();
             }
