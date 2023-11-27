@@ -11,4 +11,9 @@
     <None Remove="bin\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Blogs\Pages\Index.cshtml" />
+    <None Include="Areas\Blogs\Pages\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
 </Project>

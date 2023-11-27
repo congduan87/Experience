@@ -22,14 +22,14 @@ namespace API.GiamKichSan.Controllers.Accounts
         [Route("GetAll")]
         public ResObject<DocumentUpload_Entity> GetAll(string IDAccount)
         {
-            return controllerRepository.GetAll(x => x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.UserCreate.Equals(IDAccount));
+            return controllerRepository.GetAll(x => x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.IDCreate.Equals(IDAccount));
         }
 
         [HttpGet]
         [Route("GetByIsUse")]
         public ResObject<DocumentUpload_Entity> GetByIsUse(string IDAccount, string IsUse)
         {
-            return controllerRepository.GetAll(x => x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.UserCreate.Equals(IDAccount) && x.IsUse.Equals(IsUse) && x.IsDelete.Equals("N"));
+            return controllerRepository.GetAll(x => x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.IDCreate.Equals(IDAccount) && x.IsActive.Equals(IsUse) && x.IsDelete.Equals("N"));
         }
 
         [HttpGet()]
@@ -47,9 +47,9 @@ namespace API.GiamKichSan.Controllers.Accounts
             item.Name = obj.Name;
             item.IDParent = obj.IDParent;
             item.Type = CustEnum.TypeUpload.Folder.ToString();
-            item.UserCreate = SessionGlobal.IDUserLogin;
-            item.DateCreate = DateTime.Now;
-            item.IsUse = "Y";
+            item.IDCreate = SessionGlobal.IDUserLogin;
+            item.DateCreate = DateTime.Now.ToString(CommonFormat.FormatDateTime);
+            item.IsActive = "Y";
             item.IsDelete = "N";
             if (obj.IDParent == 0)
                 item.LevelChild = 1;
@@ -87,7 +87,7 @@ namespace API.GiamKichSan.Controllers.Accounts
             if (res.isValidate() && res.obj != null)
             {
                 var item = res.obj as DocumentUpload_Entity;
-                item.IsUse = isUse;
+                item.IsActive = isUse;
                 return controllerRepository.Edit(item);
             }
             return res;

@@ -31,7 +31,7 @@ namespace API.GiamKichSan.Controllers.Accounts
         [Route("GetFilesByIDFolder/{IsUse}")]
         public ResObject<DocumentUpload_Entity> GetFilesByIDFolder(long IDFolder, string IsUse)
         {
-            return controllerRepository.GetAll(x => !x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.IDParent.Equals(IDFolder) && x.IsUse.Equals(IsUse));
+            return controllerRepository.GetAll(x => !x.Type.Equals(CustEnum.TypeUpload.Folder.ToString()) && x.IDParent.Equals(IDFolder) && x.IsActive.Equals(IsUse));
         }
 
         [HttpGet("{id}")]
@@ -69,9 +69,9 @@ namespace API.GiamKichSan.Controllers.Accounts
                 obj.IDParent = item.IDParent;
                 obj.Name = item.Name;
                 obj.LevelChild = 0;
-                obj.UserCreate = SessionGlobal.IDUserLogin;
-                obj.DateCreate = DateTime.Now;
-                obj.IsUse = "Y";
+                obj.IDCreate = SessionGlobal.IDUserLogin;
+                obj.DateCreate = DateTime.Now.ToString(CommonFormat.FormatDateTime);
+                obj.IsActive = "Y";
                 obj.IsDelete = "N";
 
                 return controllerRepository.Insert(obj);
@@ -124,7 +124,7 @@ namespace API.GiamKichSan.Controllers.Accounts
             if (res.isValidate() || res.obj == null)
             {
                 var item = res.obj as DocumentUpload_Entity;
-                item.IsUse = IsUse;
+                item.IsActive = IsUse;
                 return controllerRepository.Edit(item);
             }
             return res;

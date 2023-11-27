@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.GiamKichSan", "Model.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WS.GiamKichSan", "WS.GiamKichSan\WS.GiamKichSan.csproj", "{5E0B8E7F-C9D8-46C9-B980-6E1709E9B7F5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWedding", "MyWedding\MyWedding.csproj", "{570C4124-4330-400C-9ECB-A8A92268FD30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrate.GiamKichSan", "Migrate.GiamKichSan\Migrate.GiamKichSan.csproj", "{D0BEE211-EBA5-4DD1-97EF-0CD5BE99E4DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{5E0B8E7F-C9D8-46C9-B980-6E1709E9B7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E0B8E7F-C9D8-46C9-B980-6E1709E9B7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E0B8E7F-C9D8-46C9-B980-6E1709E9B7F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570C4124-4330-400C-9ECB-A8A92268FD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570C4124-4330-400C-9ECB-A8A92268FD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570C4124-4330-400C-9ECB-A8A92268FD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570C4124-4330-400C-9ECB-A8A92268FD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0BEE211-EBA5-4DD1-97EF-0CD5BE99E4DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0BEE211-EBA5-4DD1-97EF-0CD5BE99E4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0BEE211-EBA5-4DD1-97EF-0CD5BE99E4DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0BEE211-EBA5-4DD1-97EF-0CD5BE99E4DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

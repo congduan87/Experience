@@ -1,0 +1,48 @@
+﻿@page
+@model MyWedding.Pages.Admin.WeddingInfo.IndexModel
+@{
+}
+<div>
+    <h4>Wedding</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingInfo.Name" class="control-label"></label>
+                    <input type="text" class="form-control" name="Name" required="" value="@Model.weddingInfo.Name" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingInfo.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingInfo.StartDate" class="control-label"></label>
+                    <input name="StartDate" value="@Model.weddingInfo.StartDate" autocomplete="off" class="date form-control" type="date" required="required">
+                    <span asp-validation-for="@Model.weddingInfo.StartDate" class="text-danger"></span>
+                </div>                
+                <div class="form-group">
+                    <label asp-for="@Model.weddingInfo.WeddingMale" class="control-label"></label>
+                    <input type="text" class="form-control" name="WeddingMale" required="" value="@Model.weddingInfo.WeddingMale" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingInfo.WeddingMale" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingInfo.WeddingFaMale" class="control-label"></label>
+                    <input type="text" class="form-control" name="WeddingFaMale" required="" value="@Model.weddingInfo.WeddingFaMale" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingInfo.WeddingFaMale" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingInfo.Url" class="control-label"></label>
+                    <input type="text" class="form-control" name="Url" required="" value="@Model.weddingInfo.Url" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingInfo.Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/WeddingInfo/WeddingCouple">My Wedding Couple</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

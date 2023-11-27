@@ -1,0 +1,34 @@
+﻿@model MyWedding.Pages.IndexModel
+<div class="pt-page pt-page-4">
+    <div class="container-fluid display_none bg-main-image">
+        <div class="blur-img bg-gifts" style="background-image: url('@Model.myWedding.ImageVideo');"></div>
+        <div class="page-scroll">
+            <div class="bg-main-image-overlay-2 ">
+                <div class="main-section-s2" style="display:flex; align-items:center;">
+                    <div class="col-md-12">
+                        <div class="page-title wow fadeInUp" data-class="fadeInUp">
+                            <h2>Xem video cưới của chúng tôi<span><i class="fas fa-heart"></i></span></h2>
+                        </div>
+
+                        <div class="container">
+                            @{
+                                foreach (var item in Model.videos)
+                                {
+                                    <div class="col-md-12 about-the-people">
+                                        <p class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">@item.Content</p>
+                                        <div class="video-btn">
+                                            <a href="@item.Path" class="video-play-btn" data-type="iframe" title="@item.Title">
+                                                <i class="far fa-play-circle" style="margin-top: 19px;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

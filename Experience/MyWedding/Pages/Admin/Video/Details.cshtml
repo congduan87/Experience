@@ -1,0 +1,40 @@
+﻿@page
+@model MyWedding.Pages.Admin.Video.DetailsModel
+@{
+}
+<div>
+    <h4>Danh sách video</h4>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingVideo.Title" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingVideo.Title" autocomplete="off">
+            <span asp-validation-for="@Model.weddingVideo.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingVideo.Content" class="control-label"></label>
+            <textarea class="form-control" asp-for="@Model.weddingVideo.Content" autocomplete="off" rows="20"></textarea>
+            <span asp-validation-for="@Model.weddingVideo.Content" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingVideo.Path" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingVideo.Path" autocomplete="off">
+            <span asp-validation-for="@Model.weddingVideo.Path" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingVideo.IsHidden" class="control-label"></label>
+            <input type="checkbox" class="form-control" asp-for="@Model.weddingVideo.IsHidden">
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.weddingVideo.ID" class="btn btn-primary" />
+            <input type="hidden" asp-for="@Model.weddingVideo.IDWedding" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Blog/Video">Về trang danh sách</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

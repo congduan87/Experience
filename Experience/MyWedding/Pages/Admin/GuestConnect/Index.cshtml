@@ -1,0 +1,47 @@
+﻿@page
+@model MyWedding.Pages.Admin.GuestConnect.IndexModel
+@{
+}
+<h1>Danh sách người truy cập</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Mã Token Client
+            </th>
+            <th>
+                Mã IP Client
+            </th>
+            <th>
+                Port Client
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var index = 0; index < Model.guestConnects.Count; index++)
+        {
+            <tr>
+                <td>
+                    @index
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.guestConnects[index].DateConnect)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.guestConnects[index].Token)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.guestConnects[index].RemoteIpAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.guestConnects[index].RemotePort)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

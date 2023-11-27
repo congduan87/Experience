@@ -37,7 +37,7 @@ namespace API.GiamKichSan
                             "https://myip.giamkichsan.com",
                             "http://happywedding.giamkichsan.com",
                             "http://search.giamkichsan.com",
-                            "http://localhost:35508")
+                            "http://localhost:42037")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
@@ -60,13 +60,11 @@ namespace API.GiamKichSan
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=UploadFile}/{action=Index}/{id?}");
             });
         }
     }

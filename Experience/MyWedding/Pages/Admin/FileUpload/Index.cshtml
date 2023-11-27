@@ -1,0 +1,55 @@
+﻿@page
+@model MyWedding.Pages.Admin.FileUpload.IndexModel
+@{
+}
+<p>
+    <a asp-page="/Admin/FileUpload/Details">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ngày đăng
+            </th>
+            <th>
+                Tên file
+            </th>
+            <th>
+                Đường dẫn
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Ẩn
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.weddingFileUpload)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateUpload)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+            <td>
+                <img title="@item.Name" src="@item.FullPath" width="200" height="200" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsHidden, new { @class = "form-control" })
+            </td>
+            <td>
+                <a asp-page="/Admin/FileUpload/Details" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page-handler="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

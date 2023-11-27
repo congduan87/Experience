@@ -1,0 +1,87 @@
+﻿@page
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Cập nhật bài viết</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form class="" action="" method="post" novalidate>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Ngày đăng bài<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control date" type="date" name="DateShow" required='required' data-validate-length-range="20">
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tiêu đề<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" data-validate-length-range="200" data-validate-words="2" name="Title" placeholder="tiêu đề bài viết" required="required" />
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Danh mục<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="IDCategory" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">HashTag<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" data-validate-length-range="200" data-validate-words="2" name="IDTag" placeholder="tiêu đề bài viết" required="required" />
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tóm tắt bài viết<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea class="form-control" rows="5" type="text" data-validate-length-range="2000" data-validate-words="10" name="Description" placeholder="tóm tắt bài viết" required="required"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Ảnh đại diện<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="ImageAvatar" placeholder="ảnh đại diện" />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nội dung bài viết<span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9">
+                                <textarea class="form-control" required="required" name='BlogDetail' id="BlogDetail" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <input class="form-control" type="hidden" name="ID" />
+                                    <button type='button' class="btn btn-primary">Submit</button>
+                                    <button type='reset' class="btn btn-success">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"></script>
+    <script src="/assets/blogs/blogCategory.js"></script>
+}

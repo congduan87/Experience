@@ -1,0 +1,51 @@
+﻿@page
+@model MyWedding.Pages.Admin.Category.IndexModel
+@{
+}
+<h1>Danh sách lời chúc</h1>
+<p>
+    <a asp-page="/Admin/Category/Details">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã danh mục
+            </th>
+            <th>
+                Tên danh mục
+            </th>
+            <th>
+                Dường dẫn
+            </th>
+            <th>
+                Ẩn
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.weddingCategories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Path)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.IsHidden)
+                </td>
+                <td>
+                    <a asp-page-handler="Hidden" asp-route-id="@item.ID">Ẩn</a> |
+                    <a asp-page="/Admin/Category/Details" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page-handler="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

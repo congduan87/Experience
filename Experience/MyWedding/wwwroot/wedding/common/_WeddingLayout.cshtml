@@ -1,0 +1,62 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" class="js no-touch cssanimations csstransitions">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@Model.myWedding.Name Wedding site!</title>
+    <meta name="description" content="@Model.myWedding.Name - Our wedding date: @Model.myWedding.StartDate | Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn">
+    <meta name="keywords" content="Wedding, Wedding website, Website đám cưới">
+    <meta property="og:site_name" content="@Model.myWedding.Name">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@Model.myWedding.Name Wedding site!">
+    <meta property="og:url" content="@Model.myWedding.Url">
+    <meta property="og:description" content="@Model.myWedding.Name - Our wedding date: @Model.myWedding.StartDate | Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn">
+    <meta property="og:image" content="@Model.myWedding.Image">
+    <meta property="og:image:url" content="@Model.myWedding.Image">
+    <meta property="og:image:secure_url" content="@Model.myWedding.Image">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <link href="wedding/fonts/fontawesome5.0.10/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="wedding/fonts/fonts.googleapis.com/great_vibes_amp.css?family=Great+Vibes&amp;display=swap" rel="stylesheet" />
+    <link href="wedding/fonts/fonts.googleapis.com/roboto_amp.css?family=Roboto:400,100,300,500,700,900&amp;display=swap" rel="stylesheet" />
+
+    <link href="wedding/templates/template22/css/style.css" rel="stylesheet" />
+    <link href="wedding/templates/template22/css/libs.css" rel="stylesheet" />
+    <link href="wedding/common/calendar.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="wedding/js/analytics.js"></script>
+    <script src="wedding/js/googletagmanager.gtag.js"></script>
+
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-K9L0ZFE1PJ');</script>
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    @await Html.PartialAsync("_WeddingMenu")
+    <div class="main-page-area">
+        @RenderBody()
+        <div class="pagination-button" style="display: flex; bottom: 70px; right: 50px;">
+            <a class="pa-previous disabled">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                </svg>
+            </a>
+            <a class="pa-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/wedding/templates/template22/js/jquery-plugin-collection.js"></script>
+    <script type="text/javascript" src="~/wedding/templates/template22/js/script.js"></script>
+    <script src="wedding/common/calendar.js"></script>
+    <script src="wedding/common/bii.js"></script>
+</body>
+</html>

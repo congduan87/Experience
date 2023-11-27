@@ -1,0 +1,13 @@
+﻿@page
+@model MyWedding.Pages.IndexModel
+<div id="pt-main" class="pt-perspective">
+    @Html.RenderPartialAsync("UseControl/_Home.cshtml")
+    @Html.RenderPartialAsync("UseControl/_WeddingCouple.cshtml")
+    @Html.RenderPartialAsync("UseControl/_Blog.cshtml")
+    @Html.RenderPartialAsync("UseControl/_VideoWedding.cshtml")
+    @Html.RenderPartialAsync("UseControl/_Event.cshtml")
+    @Html.RenderPartialAsync("UseControl/_Album.cshtml")
+    <div class="pt-page pt-page-7"></div>
+    @Html.RenderPartialAsync("UseControl/_Suggestion.cshtml")
+    @Html.RenderPartialAsync("UseControl/_Benefit.cshtml")
+</div>

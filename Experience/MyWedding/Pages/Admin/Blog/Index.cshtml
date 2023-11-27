@@ -1,0 +1,55 @@
+﻿@page
+@model MyWedding.Pages.Admin.Blog.IndexModel
+@{
+}
+<p>
+    <a asp-page="/Admin/Blog/Details">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ngày đăng
+            </th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Nội dung
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Ẩn
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.weddingBlog)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    <img title="@item.Title" src="@item.Image" width="200" height="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsHidden)
+                </td>
+                <td>
+                    <a asp-page="/Admin/Blog/Details" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page-handler="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

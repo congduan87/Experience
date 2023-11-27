@@ -1,0 +1,54 @@
+﻿@page
+@model MyWedding.Pages.Admin.WeddingInfo.ImageCategoryModel
+<div>
+    <h4>Tổ chức sự kiện</h4>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.Image" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.Image" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageHome" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageHome" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageCouple" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageCouple" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageBlog" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageBlog" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageAlbum" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageAlbum" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageVideo" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageVideo" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageEvent" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageEvent" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageSuggestion" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageSuggestion" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.wedding.ImageBenefit" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.wedding.ImageBenefit" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.wedding.ID" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/WeddingInfo/Index">Về trang danh sách</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

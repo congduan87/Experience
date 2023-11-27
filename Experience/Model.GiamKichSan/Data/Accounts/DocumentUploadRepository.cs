@@ -15,7 +15,7 @@ namespace Model.GiamKichSan.Data.Accounts
 
         public ResObject<bool> Delete(long ID, string IDAccount)
         {
-            return base.Delete(x => x.ID.Equals(ID) && x.UserCreate.Equals(IDAccount));
+            return base.Delete(x => x.ID.Equals(ID) && x.IDCreate.Equals(IDAccount));
         }
 
         public ResObject<DocumentUpload_Entity> Edit(DocumentUpload_Entity item)
@@ -30,12 +30,12 @@ namespace Model.GiamKichSan.Data.Accounts
 
         public ResObject<DocumentUpload_Entity> GetByID(long ID, string IDAccount)
         {
-            return base.GetById<DocumentUpload_Entity>(x => x.ID.Equals(ID) && x.UserCreate.Equals(IDAccount));
+            return base.GetById<DocumentUpload_Entity>(x => x.ID.Equals(ID) && x.IDCreate.Equals(IDAccount));
         }
 
         public byte GetLevelChildByID(long ID, string IDAccount)
         {
-            var output = base.GetById<DocumentUpload_Entity>(x => x.ID.Equals(ID) && x.UserCreate.Equals(IDAccount));
+            var output = base.GetById<DocumentUpload_Entity>(x => x.ID.Equals(ID) && x.IDCreate.Equals(IDAccount));
             if (output != null && output.isValidate() && output.obj != null)
                 return Convert.ToByte(((output.obj as DocumentUpload_Entity)?.LevelChild ?? 0) + 1);
             else

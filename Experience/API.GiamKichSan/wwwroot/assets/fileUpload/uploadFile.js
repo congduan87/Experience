@@ -127,9 +127,9 @@ let menuFolder = {
         }
         if (isChild) {
             if (parent.levelChild >= 2)
-                $liParent.addClass("expand");//collapse
+                $liParent.addClass("expand-node");//collapse
             else
-                $liParent.addClass("expand");
+                $liParent.addClass("expand-node");
 
             $liParent.append($ulChild);
         }
@@ -137,10 +137,10 @@ let menuFolder = {
     isCollapseExpand: function (evnt) {
         evnt.stopPropagation();
         let vclass = this.getAttribute('class') + '';
-        if (vclass.indexOf('expand') >= 0)
-            $(this).removeClass("expand").addClass("collapse");
-        else if (vclass.indexOf('collapse') >= 0)
-            $(this).removeClass("collapse").addClass("expand");
+        if (vclass.indexOf('expand-node') >= 0)
+            $(this).removeClass("expand-node").addClass("collapse-node");
+        else if (vclass.indexOf('collapse-node') >= 0)
+            $(this).removeClass("collapse-node").addClass("expand-node");
     },
     //Lấy giá trị của Treeview đang active
     getKeyActiveTreeView: function () {
@@ -164,7 +164,7 @@ let menuFolder = {
                 if ($parent.find("ul").length > 0)
                     $parent.find("ul").append('<li data-key="' + item.id + '">' + item.name + '</li>');
                 else {
-                    $parent.addClass("expand");
+                    $parent.addClass("expand-node");
                     $parent.append('<ul><li data-key="' + item.id + '">' + item.name + '</li></ul>');
                 }
             }
@@ -273,10 +273,10 @@ let menuFolder = {
         $('.edit-folder').click(function (evnt) {
             evnt.stopPropagation();
             let vclass = this.getAttribute('class') + '';
-            if (vclass.indexOf('expand') >= 0)
-                $(this).removeClass("expand").addClass("collapse");
-            else if (vclass.indexOf('collapse') >= 0)
-                $(this).removeClass("collapse").addClass("expand");
+            if (vclass.indexOf('expand-node') >= 0)
+                $(this).removeClass("expand-node").addClass("collapse-node");
+            else if (vclass.indexOf('collapse-node') >= 0)
+                $(this).removeClass("collapse-node").addClass("expand-node");
 
             //Sự kiện view insert, edit folder
             let dataKey = $(this).find('a').attr('data-key');
@@ -286,10 +286,10 @@ let menuFolder = {
         $('.delete-folder').click(function (evnt) {
             evnt.stopPropagation();
             let vclass = this.getAttribute('class') + '';
-            if (vclass.indexOf('expand') >= 0)
-                $(this).removeClass("expand").addClass("collapse");
-            else if (vclass.indexOf('collapse') >= 0)
-                $(this).removeClass("collapse").addClass("expand");
+            if (vclass.indexOf('expand-node') >= 0)
+                $(this).removeClass("expand-node").addClass("collapse-node");
+            else if (vclass.indexOf('collapse-node') >= 0)
+                $(this).removeClass("collapse-node").addClass("expand-node");
 
             //Sự kiện delete folder
             let dataKey = $(this).find('a').attr('data-key');
@@ -495,10 +495,10 @@ var uploadFile = {
         $('.copy-link-file-upload').click(function (evnt) {
             evnt.stopPropagation();
             let vclass = this.getAttribute('class') + '';
-            if (vclass.indexOf('expand') >= 0)
-                $(this).removeClass("expand").addClass("collapse");
-            else if (vclass.indexOf('collapse') >= 0)
-                $(this).removeClass("collapse").addClass("expand");
+            if (vclass.indexOf('expand-node') >= 0)
+                $(this).removeClass("expand-node").addClass("collapse-node");
+            else if (vclass.indexOf('collapse-node') >= 0)
+                $(this).removeClass("collapse-node").addClass("expand-node");
 
             //Sự kiện delete
             let dataKey = $(this).find('a').attr('data-key');
@@ -509,10 +509,10 @@ var uploadFile = {
         $('.edit-file-upload').click(function (evnt) {
             evnt.stopPropagation();
             let vclass = this.getAttribute('class') + '';
-            if (vclass.indexOf('expand') >= 0)
-                $(this).removeClass("expand").addClass("collapse");
-            else if (vclass.indexOf('collapse') >= 0)
-                $(this).removeClass("collapse").addClass("expand");
+            if (vclass.indexOf('expand-node') >= 0)
+                $(this).removeClass("expand-node").addClass("collapse-node");
+            else if (vclass.indexOf('collapse-node') >= 0)
+                $(this).removeClass("collapse-node").addClass("expand-node");
 
             //Sự kiện view insert, edit
             let dataKey = $(this).find('a').attr('data-key');
@@ -526,10 +526,10 @@ var uploadFile = {
         $('.delete-file-upload').click(function (evnt) {
             evnt.stopPropagation();
             let vclass = this.getAttribute('class') + '';
-            if (vclass.indexOf('expand') >= 0)
-                $(this).removeClass("expand").addClass("collapse");
-            else if (vclass.indexOf('collapse') >= 0)
-                $(this).removeClass("collapse").addClass("expand");
+            if (vclass.indexOf('expand-node') >= 0)
+                $(this).removeClass("expand-node").addClass("collapse-node");
+            else if (vclass.indexOf('collapse-node') >= 0)
+                $(this).removeClass("collapse-node").addClass("expand-node");
 
             //Sự kiện delete
             let dataKey = $(this).find('a').attr('data-key');

@@ -1,0 +1,45 @@
+﻿@page
+@model MyWedding.Pages.Admin.Blog.DetailsModel
+@{
+}
+<div>
+    <h4>Danh sách blog</h4>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingBlog.CreateDate" class="control-label"></label>
+            <input  asp-for="@Model.weddingBlog.CreateDate" autocomplete="off" class="date form-control" type="date" required="required">
+            <span asp-validation-for="@Model.weddingBlog.CreateDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingBlog.Title" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingBlog.Title" autocomplete="off">
+            <span asp-validation-for="@Model.weddingBlog.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingBlog.Content" class="control-label"></label>
+            <textarea class="form-control" asp-for="@Model.weddingBlog.Content" autocomplete="off" rows="20"></textarea>
+            <span asp-validation-for="@Model.weddingBlog.Content" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingBlog.Image" class="control-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.weddingBlog.Image" autocomplete="off">
+            <span asp-validation-for="@Model.weddingBlog.Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.weddingBlog.IsHidden" class="control-label"></label>
+            <input type="checkbox" class="form-control" asp-for="@Model.weddingBlog.IsHidden">
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.weddingBlog.ID" class="btn btn-primary" />
+            <input type="hidden" asp-for="@Model.weddingBlog.IDWedding" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Blog/Index">Về trang danh sách</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,62 @@
+﻿@model MyWedding.Pages.IndexModel
+<div class="pt-page pt-page-5">
+    <div class="container-fluid display_none bg-main-image">
+        <div class="blur-img bg-wedding" style="background-image: url('@Model.myWedding.ImageEvent');"></div>
+        <div class="page-fixed">
+            <div class="bg-main-image-overlay-fixed">
+                <div class="main-section-s2">
+                    <div class="col-md-12">
+                        <div class="page-title wow fadeInUp" data-class="fadeInUp">
+                            <h2>Sự Kiện Cưới<span><i class="fas fa-heart"></i></span></h2>
+                        </div>
+                        <div class="container">
+                            <div class="col-md-12 about-the-people" style="margin-bottom:30px;">
+                                <p class="col-md-6 col-md-offset-3 col-xs-12">...tình yêu không phải là nhìn chằm chằm vào nhau, mà là nhìn chằm chằm về cùng một hướng...</p>
+                            </div>
+                        </div>
+                        <div class="container ceremony-section">
+                            @{
+                                foreach (var item in Model.events)
+                                {
+                                    <div class="white-box ceremony-detail">
+                                        <ul style="list-style-type:none">
+                                            <li class="text-center"><img src="@item.Image" alt="@item.Title" width="250" style="aspect-ratio: 3/4"></li>
+                                            <li class="text-center"><h5>@item.Title.ToUpper()</h5></li>
+                                            <li class="text-center"><i class="fas fa-clock"></i> @Convert.ToDateTime(item.StartDate).ToString("HH:mm dd/MM/yyyy")</li>
+                                            <li class="text-center"><img class="pin-icon" src="wedding/images/pin.png" alt="locationimage"></li>
+                                            <li class="text-center"><p style="word-wrap: break-word; width:300px">@item.Address</p></li>
+                                            <li class="text-center"><a class="text-center-sm" href="@item.MapAddress" target="_blank">Xem bản đồ  <i class="fas fa-caret-right"></i></a></li>
+                                        </ul>
+                                        <div class="rsvp-button text-center" style="margin: 10px 0;">
+                                            <button type="submit" class="hvr-sweep-to-right calendar-button-custom-click" style="letter-spacing: 1px;font-weight: inherit;">Thêm vào lịch</button>
+                                        </div>
+                                        <div class="calendar-button" style="visibility: hidden;height: 0;overflow: hidden;">
+                                            <div class="atcb" style="display:none;">
+                                                {
+                                                "name":"@item.Title.ToUpper() (@Model.myWedding.Name)",
+                                                "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng tôi!. Thông tin chi tiết xem tại website:<br>[url]@Model.myWedding.Url [/url]",
+                                                "startDate":"@Convert.ToDateTime(item.StartDate).ToString("yyyy-MM-dd")",
+                                                "endDate":"@Convert.ToDateTime(item.StartDate).ToString("yyyy-MM-dd")",
+                                                "startTime":"@Convert.ToDateTime(item.StartDate).ToString("HH:mm")",
+                                                "endTime":"@Convert.ToDateTime(item.StartDate).ToString("HH:mm")",
+                                                "location":"@item.Address",
+                                                "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"],
+                                                "timeZone":"Asia/Ho_Chi_Minh",
+                                                "iCalFileName":"Reminder-Event",
+                                                "listStyle":"modal",
+                                                "label":"Thêm vào lịch",
+                                                "trigger":"click"
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

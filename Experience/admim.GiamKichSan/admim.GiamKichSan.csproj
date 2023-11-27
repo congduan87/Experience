@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="wwwroot\filesImport\**" />
     <Content Remove="bin\**" />
+    <Content Remove="wwwroot\filesImport\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="wwwroot\filesImport\**" />
     <None Remove="bin\**" />
+    <None Remove="wwwroot\filesImport\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -275,10 +279,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.GiamKichSan\Common.GiamKichSan.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\filesImport\" />
   </ItemGroup>
 
 </Project>

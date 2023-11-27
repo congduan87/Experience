@@ -93,11 +93,11 @@ button {
                 color: #18ccca;
             }
 
-        .upload-file .tree-view li.collapse>ul {
+        .upload-file .tree-view li.collapse-node > ul {
             display: none;
         }
 
-        .upload-file .tree-view li.collapse::before {
+        .upload-file .tree-view li.collapse-node::before {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
             display: inline-block;
@@ -111,11 +111,11 @@ button {
             font-size: 23px;
         }
 
-        .upload-file .tree-view li.expand>ul {
+        .upload-file .tree-view li.expand-node > ul {
             display: block;
         }
 
-        .upload-file .tree-view li.expand::before {
+        .upload-file .tree-view li.expand-node::before {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
             display: inline-block;

@@ -1,0 +1,131 @@
+﻿@page
+@model MyWedding.Pages.Admin.WeddingInfo.WeddingCouple
+@{
+}
+<div>
+    <h4>Wedding</h4>
+    <hr />
+    <div class="container">
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h3>Thông tin nhà trai</h3>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleDescription" class="control-label"></label>
+                    <textarea class="form-control" asp-for="@Model.weddingCouple.MaleDescription"
+                              rows="5"
+                              autocomplete="off">@Model.weddingCouple.MaleDescription</textarea>
+                    <span asp-validation-for="@Model.weddingCouple.MaleDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleImage" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleImage" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleFacebookUrl" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleFacebookUrl" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleFacebookUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FatherMaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FatherMaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FatherMaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MotherMaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MotherMaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MotherMaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleNameBank" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleNameBank" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleNameBank" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleIDBankCard" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleIDBankCard" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleIDBankCard" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleAddressBank" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MaleAddressBank" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MaleAddressBank" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MaleImageBank" class="control-label"></label>
+                    <input type="file" class="form-control" asp-for="@Model.MaleFileUpload">
+                    <input type="hidden" asp-for="@Model.weddingCouple.MaleImageBank" />
+                </div>
+
+
+                <h3>Thông tin nhà gái</h3>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleDescription" class="control-label"></label>
+                    <textarea class="form-control" asp-for="@Model.weddingCouple.FeMaleDescription"
+                              rows="5"
+                              autocomplete="off">@Model.weddingCouple.FeMaleDescription</textarea>
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleImage" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleImage" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleFacebookUrl" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleFacebookUrl" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleFacebookUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FatherFeMaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FatherFeMaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FatherFeMaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.MotherFeMaleName" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.MotherFeMaleName" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.MotherFeMaleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleNameBank" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleNameBank" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleNameBank" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleIDBankCard" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleIDBankCard" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleIDBankCard" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleAddressBank" class="control-label"></label>
+                    <input type="text" class="form-control" asp-for="@Model.weddingCouple.FeMaleAddressBank" autocomplete="off">
+                    <span asp-validation-for="@Model.weddingCouple.FeMaleAddressBank" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.weddingCouple.FeMaleImageBank" class="control-label"></label>
+                    <input type="file" class="form-control" asp-for="@Model.FeMaleFileUpload">
+                    <input type="hidden" asp-for="@Model.weddingCouple.FeMaleImageBank" />
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" asp-for="@Model.weddingCouple.IDWedding" />
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

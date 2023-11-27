@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Model.GiamKichSan.Models.Accounts
 {
     [Table("DocumentUpload")]
-    public partial class DocumentUpload_Entity
+    public partial class DocumentUpload_Entity: BaseCUD_Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,17 +17,10 @@ namespace Model.GiamKichSan.Models.Accounts
         public long IDParent { get; set; }
         [StringLength(200)]
         public string Name { get; set; }
-        public byte? LevelChild { get; set; }
+        public byte LevelChild { get; set; }
         [StringLength(20)]
         public string Type { get; set; }
         [StringLength(500)]
         public string Path { get; set; }
-        [StringLength(450)]
-        public string UserCreate { get; set; }
-        public DateTime? DateCreate { get; set; }
-        [StringLength(1)]
-        public string IsUse { get; set; }
-        [StringLength(1)]
-        public string IsDelete { get; set; }
     }
 }
