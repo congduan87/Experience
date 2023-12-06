@@ -1,0 +1,64 @@
+﻿@page
+    <link href="/areas/blogs/blogCategory.css" rel="stylesheet" />
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Quản lý danh mục</h3>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                            <button class="btn btn-success edit-dialog">Create</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <section class="section-treeview col-md-2 col-sm-3">
+                            <p class="title">
+                                Danh mục
+                            </p>
+                            <nav class="tree-view">
+                                <ul>
+                                </ul>
+                            </nav>
+                        </section>
+                        <table class="table table-striped jambo_table bulk_action col-md-10 col-sm-9">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">STT</th>
+                                    <th class="column-title">Tên danh mục</th>
+                                    <th class="column-title">Khóa</th>
+                                    <th class="column-title">Xóa</th>
+                                    <th class="column-title"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" style="visibility:hidden" id="ModalButton" data-toggle="modal">Launch demo modal</button>
+    <div class="modal fade" id="ModalCreate" tabindex="-1" role="dialog" aria-labelledby="CreateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <form class="modal-content">
+                @{Html.RenderPartial("Details");}
+            </form>
+        </div>
+    </div>
+    @section scripts{
+        <script src="~/data/blogs/categoryRepository.js"></script>
+        <script src="/areas/blogs/categoryController.js"></script>
+    }

@@ -1,10 +1,8 @@
 ﻿@page
-<link href="/areas/blogs/blogCategory.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Danh sách Blog</h3>
+            <h3>Danh sách Tag</h3>
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5 form-group pull-right top_search">
@@ -12,7 +10,6 @@
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
-                        <button class="btn btn-success edit-dialog">Create</button>
                     </span>
                 </div>
             </div>
@@ -24,23 +21,13 @@
         <div class="col-md-12 col-sm-12">
             <div class="x_panel">
                 <div class="x_content">
-                    <section class="section-treeview col-md-2 col-sm-3">
-                        <p class="title">
-                            Danh mục
-                        </p>
-                        <nav class="tree-view">
-                            <ul>
-                            </ul>
-                        </nav>
-                    </section>
-                    <table class="table table-striped jambo_table bulk_action col-md-10 col-sm-9">
+                    <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
                                 <th class="column-title">STT</th>
-                                <th class="column-title">Ngày tạo</th>
-                                <th class="column-title">Tiêu đề</th>
-                                <th class="column-title">Tóm tắt</th>
+                                <th class="column-title">Tên</th>
                                 <th class="column-title">Trạng thái</th>
+                                <th class="column-title">Xóa</th>
                                 <th class="column-title"></th>
                             </tr>
                         </thead>
@@ -54,15 +41,29 @@
 
 <button type="button" style="visibility:hidden" id="ModalButton" data-toggle="modal">Launch demo modal</button>
 <div class="modal fade" id="ModalCreate" tabindex="-1" role="dialog" aria-labelledby="CreateModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <section class="modal-content">
-            @{Html.RenderPartial("Details");}
-        </section>
+    <div class="modal-dialog" role="document">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateModalLabel">Cập nhật</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Tên tag</label>
+                    <input type="text" class="form-control" name="Name" autocomplete="off">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="ID">
+                <button type="button" class="btn btn-primary save-dialog">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </form>
     </div>
 </div>
-
 @section scripts{
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="/areas/blogs/blogCategory.js"></script>
+    <script src="/areas/blogs/tagController.js"></script>
 }

@@ -9,7 +9,7 @@ namespace Model.GiamKichSan.Data.Blogs
 {
     public class CategoryRepository : SqlBaseRepository<Category_Entity>
     {
-        public CategoryRepository(string connectionString) : base(connectionString)
+        public CategoryRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
 

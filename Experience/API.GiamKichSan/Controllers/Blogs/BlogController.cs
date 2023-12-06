@@ -1,6 +1,7 @@
 ﻿using API.GiamKichSan.Common;
 using API.GiamKichSan.Models.Blogs;
 using Microsoft.AspNetCore.Mvc;
+using Model.GiamKichSan.Common.SQL;
 using Model.GiamKichSan.Data.Blogs;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.Blogs;
@@ -13,9 +14,9 @@ namespace API.GiamKichSan.Controllers.Blogs
     public class BlogController : ControllerBase
     {
         private BlogRepository itemRepository { get; set; }
-        public BlogController()
+        public BlogController(BaseSQLConnection baseSQLConnection)
         {
-            itemRepository = new BlogRepository(SessionGlobal.DefaultConnectString);
+            itemRepository = new BlogRepository(baseSQLConnection);
         }
 
         [HttpGet]
@@ -26,10 +27,24 @@ namespace API.GiamKichSan.Controllers.Blogs
         }
 
         [HttpGet]
-        [Route("GetByID")]
-        public ResObject<Blog_Entity> GetByID(long ID)
+        [Route("GetAllByIDCategory")]
+        public ResObject<Blog_Entity> GetAllByIDCategory(long IDCatetory)
         {
-            return itemRepository.GetByID(ID);
+            return itemRepository.GetAllByIDCategory(IDCatetory);
+        }
+
+        [HttpGet]
+        [Route("GetByID")]
+        public ResObject<BlogModel> GetByID(long ID)
+        {
+            ResObject<BlogModel> output = new ResObject<BlogModel>() { obj = new BlogModel()};
+            output.obj.blog = itemRepository.GetByID(ID).obj;
+            output.obj.blogCategories = itemRepository.blogCategoryRepository.GetAllByIDBlog(ID).listObj;
+            output.obj.blogTags = itemRepository.blogTagRepository.GetAllByIDBlog(ID).listObj;
+            output.obj.blogDetails = itemRepository.blogDetailRepository.GetAll(x=>x.IDBlog.Equals(ID)).listObj;
+            output.obj.blogComments = new List<BlogComment_Entity>();
+
+            return output;
         }
 
         [HttpPost]
@@ -44,6 +59,8 @@ namespace API.GiamKichSan.Controllers.Blogs
             resOutput.IDCreate = SessionGlobal.IDUserLogin;
 
             var resDeltail = new List<BlogDetail_Entity>();
+            var resCategory = new List<BlogCategory_Entity>();
+            var resTag = new List<BlogTag_Entity>();
             var orderNumber = 1;
             while (item.BlogDetail.Length > 0)
             {
@@ -57,7 +74,37 @@ namespace API.GiamKichSan.Controllers.Blogs
                 item.BlogDetail = item.BlogDetail.Substring(resDeltail[resDeltail.Count-1].Description.Length);
             }
 
-            return itemRepository.Insert(resOutput, resDeltail);
+            if(item.IDCategory != null)
+            {
+                for (int orderIndex = 0; orderIndex < item.IDCategory.Length; orderIndex++)
+                {
+                    if(item.IDCategory[orderIndex] != 0)
+                    {
+                        resCategory.Add(new BlogCategory_Entity()
+                        {
+                            IDCreate = SessionGlobal.IDUserLogin,
+                            IDCategory = item.IDCategory[orderIndex]
+                        });
+                    }  
+                }
+            }
+
+            if (item.IDTag != null)
+            {
+                for (int orderIndex = 0; orderIndex < item.IDTag.Length; orderIndex++)
+                {
+                    if (item.IDTag[orderIndex] != 0)
+                    {
+                        resTag.Add(new BlogTag_Entity()
+                        {
+                            IDCreate = SessionGlobal.IDUserLogin,
+                            IDTag = item.IDTag[orderIndex]
+                        });
+                    }
+                }
+            }
+
+            return itemRepository.Insert(resOutput, resDeltail, resCategory, resTag);
         }
 
         [HttpPut]
@@ -73,6 +120,8 @@ namespace API.GiamKichSan.Controllers.Blogs
             resOutput.ID = item.ID;
 
             var resDeltail = new List<BlogDetail_Entity>();
+            var resCategory = new List<BlogCategory_Entity>();
+            var resTag = new List<BlogTag_Entity>();
             var orderNumber = 1;
             while (item.BlogDetail.Length > 0)
             {
@@ -80,13 +129,43 @@ namespace API.GiamKichSan.Controllers.Blogs
                 {
                     OrderNumber = orderNumber,
                     IDCreate = SessionGlobal.IDUserLogin,
-                    Description = item.BlogDetail.Substring(0, 4000)
+                    Description = item.BlogDetail.Length > 4000 ? item.BlogDetail.Substring(0, 4000) : item.BlogDetail
                 });
                 orderNumber++;
-                item.BlogDetail = item.BlogDetail.Substring(4000);
+                item.BlogDetail = item.BlogDetail.Substring(resDeltail[resDeltail.Count - 1].Description.Length);
             }
 
-            return itemRepository.Edit(resOutput, resDeltail);
+            if (item.IDCategory != null)
+            {
+                for (int orderIndex = 0; orderIndex < item.IDCategory.Length; orderIndex++)
+                {
+                    if (item.IDCategory[orderIndex] != 0)
+                    {
+                        resCategory.Add(new BlogCategory_Entity()
+                        {
+                            IDCreate = SessionGlobal.IDUserLogin,
+                            IDCategory = item.IDCategory[orderIndex]
+                        });
+                    }
+                }
+            }
+
+            if (item.IDTag != null)
+            {
+                for (int orderIndex = 0; orderIndex < item.IDTag.Length; orderIndex++)
+                {
+                    if (item.IDTag[orderIndex] != 0)
+                    {
+                        resTag.Add(new BlogTag_Entity()
+                        {
+                            IDCreate = SessionGlobal.IDUserLogin,
+                            IDTag = item.IDTag[orderIndex]
+                        });
+                    }
+                }
+            }
+
+            return itemRepository.Edit(resOutput, resDeltail, resCategory, resTag);
         }
 
         [HttpPut]

@@ -9,7 +9,7 @@ namespace Model.GiamKichSan.Data.Blogs
 {
     public class BlogDetailRepository : SqlBaseRepository<BlogDetail_Entity>
     {
-        public BlogDetailRepository(string connectionString) : base(connectionString)
+        public BlogDetailRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
         public ResObject<BlogDetail_Entity> GetAll(Expression<Func<BlogDetail_Entity, bool>> func = null)

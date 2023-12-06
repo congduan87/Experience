@@ -9,7 +9,7 @@ namespace Model.GiamKichSan.Data.Blogs
 {
     public class TagRepository : SqlBaseRepository<Tag_Entity>
     {
-        public TagRepository(string connectionString) : base(connectionString)
+        public TagRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
 

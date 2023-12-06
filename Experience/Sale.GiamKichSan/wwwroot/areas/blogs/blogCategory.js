@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     blogCategory.init();
+    menuCategory.init();
 });
 
 let blogCategory = {
@@ -160,45 +161,146 @@ let blogCategory = {
                 console.log(error);
             });
 
-        blogCategory.getAllCategory();
-
-        $('button[type=button]').click(function (evt) {
-            evt.preventDefault();
-            let data = APIHelper.serializeObj($('form'));
-            data.BlogDetail = blogCategory.editor.getData();
-            blogCategory.insert(data).done((data) => {
-                if (data != null && data.obj != null && data.obj.id > 0) {
-                    alert('Cập nhật thành công');
-                    $('button[type=reset]').click();
-                }
-                else {
-                    alert('Cập nhật thất bại');
-                }
-            }).catch((error) => {
-                console.log(error);
-            });
+        $('.edit-dialog').click(blogCategory.evtShowDialog);
+        $('select[name=IDCategory]').select2();
+        $('select[name=IDTag]').select2();
+    },
+    getAllBlogByCategory: function (idCategory) {
+        return $.ajax({
+            url: APIHelper.host + "/Blogs/Blog/GetAllByIDCategory",
+            type: 'GET',
+            data: { IDCatetory: idCategory }
         });
     },
-    getAllCategory: function () {
-        $.ajax({
-            url: APIHelper.host + "/Blogs/Category/GetAll",
+    getAllTag: function () {
+        return $.ajax({
+            url: APIHelper.host + "/Blogs/Tag/GetAll",
             type: 'GET',
-        }).done((data) => {
+        });
+    },
+    getByID: function (id) {
+        return $.ajax({
+            url: APIHelper.host + "/Blogs/Blog/GetByID?ID=" + id,
+            contentType: 'application/json',
+            timeout: 60000,
+            type: 'GET',
+        });
+    },
+    showDialogUpdate: function (dataKeyCurrent) {
+        let $model = $('#ModalCreate');
+        var dataCategory = menuCategory.getKeyActiveTreeView();
+        if (dataCategory.key == null || dataCategory.key == '' || dataCategory == '0') {
+            alert('Yêu cầu chọn tên danh mục!')
+            return;
+        }
+        menuCategory.getAllByIDParent(dataCategory.key).done((data) => {
             if (data != null && data.listObj != null) {
                 let option = '';
                 let $select = $('select[name=IDCategory]');
                 $select.empty();
-
+                $select.append('<option value="' + dataCategory.key + '">' + dataCategory.value + '</option>');
                 for (var i = 0; i < data.listObj.length; i++) {
-                    $option = '<option value="' + data.listObj[i].id + '">' + data.listObj[i].name +'</option>';
+                    $option = '<option value="' + data.listObj[i].id + '">' + data.listObj[i].name + '</option>';
                     $select.append($option);
                 }
             }
         }).catch((error) => {
             console.log(error);
         });
+        blogCategory.getAllTag().done((data) => {
+            if (data != null && data.listObj != null) {
+                let option = '';
+                let $select = $('select[name=IDTag]');
+                $select.empty();                
+                for (var i = 0; i < data.listObj.length; i++) {
+                    $option = '<option value="' + data.listObj[i].id + '">' + data.listObj[i].name + '</option>';
+                    $select.append($option);
+                }
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+        if (dataKeyCurrent != '') {
+            blogCategory.getByID(dataKeyCurrent).done(data => {
+                if (data != null && data.obj != null) {
+                    if (data.obj.blog != null) {
+                        $model.find('input[name="ID"]').val(data.obj.blog.id);
+                        $model.find('input[name="DateShow"]').val(data.obj.blog.dateShow);
+                        $model.find('input[name="Title"]').val(data.obj.blog.title);
+                        $model.find('textarea[name="Description"]').val(data.obj.blog.description);
+                        $model.find('input[name="ImageAvatar"]').val(data.obj.blog.imageAvatar);
+                    }
+
+                    if (data.obj.blogCategories != null && data.obj.blogCategories.length > 0) {
+                        let idcategories = [];
+                        data.obj.blogCategories.forEach(element => idcategories.push(element.idCategory));
+                        $('select[name=IDCategory]').val(idcategories).trigger('change');
+                    }
+                    if (data.obj.blogTags != null && data.obj.blogTags.length > 0) {
+                        let idTags = [];
+                        data.obj.blogTags.forEach(element => idTags.push(element.idTag));
+                        $('select[name=IDTag]').val(idTags).trigger('change');
+                    }
+                    if (data.obj.blogDetails != null && data.obj.blogDetails.length > 0) {
+                        let details = '';
+                        data.obj.blogDetails.forEach(element => { details += element.description; });
+                        blogCategory.editor.setData(details);
+                    }
+
+                    
+
+                    document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
+                    document.getElementById('ModalButton').click();
+                    $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
+                }
+            });
+
+            return;
+        }
+        else {
+            $model.find('input[name="ID"]').val("0");
+            $model.find('input[name="DateShow"]').val('');
+            $model.find('input[name="Title"]').val('');
+            $model.find('input[name="Description"]').val('');
+            $model.find('input[name="ImageAvatar"]').val('');
+
+            document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
+            document.getElementById('ModalButton').click();
+            $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
+        }
     },
-    insert: async function (data) {
+    refreshTable: function (data) {
+        $("#tbTable").empty();
+        if (data != null && data.listObj != null && data.listObj.length > 0) {
+            var bodyContent = "";
+            var lock = "";
+            for (let i = 0; i < data.listObj.length; i++) {
+                lock = (data.listObj[i].isActive == 'Y' ? 'class="btn btn-danger btn-xs" title="Khóa"><i class="fa fa-lock"></i>' : 'class="btn btn-dark btn-xs"  title="Mở khóa"><i class="fa fa-unlock"></i>');
+                if (i % 0 == 0) {
+                    bodyContent = '<tr class="even pointer" id="' + data.listObj[i].id + '">';
+                }
+                else {
+                    bodyContent = '<tr class="odd pointer" id="' + data.listObj[i].id + '">';
+                }
+
+                bodyContent += '<td class="">' + (i + 1) + '</td>';
+                bodyContent += '<td class="">' + data.listObj[i].dateShow + '</td>';
+                bodyContent += '<td class="">' + data.listObj[i].title + '</td>';
+                bodyContent += '<td class="">' + data.listObj[i].description + '</td>';
+                bodyContent += '<td class="">' + '<button ' + lock + '</button></td>';
+                bodyContent += '<td class="last">';
+                bodyContent += '<button class="btn btn-info btn-xs" title= "Xem"  data-key="' + data.listObj[i].id + '"><i class="fa fa-eye"></i></button>';
+                bodyContent += '<button class="btn btn-warning btn-xs edit-dialog" title= "Sửa"  data-key="' + data.listObj[i].id + '"><i class="fa fa-pencil"></i></button>';
+                bodyContent += '<button class="btn btn-dark btn-xs delete-dialog" title= "Xóa" data-key="' + data.listObj[i].id + '"><i class="fa fa-trash"></i></button>';
+                bodyContent += '</td>';
+                bodyContent += '</tr>';
+                $("#tbTable").append(bodyContent);
+            }
+            blogCategory.refreshEvent();
+        }
+
+    },
+    insert: function (data) {
         return $.ajax({
             url: APIHelper.host + "/Blogs/Blog/Insert",
             type: 'POST',
@@ -207,6 +309,190 @@ let blogCategory = {
             timeout: 60000
         });
     },
+    edit: function (data) {
+        return $.ajax({
+            url: APIHelper.host + "/Blogs/Blog/Edit",
+            type: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            timeout: 60000
+        });
+    },
+    evtShowDialog: function (evnt) {
+        evnt.stopPropagation();
+        let dataKey = $(this).attr('data-key');
+        dataKey = dataKey == null ? '' : dataKey;
+        blogCategory.showDialogUpdate(dataKey);
+    },
+    evtUpdateBlog: function (evt) {
+        evt.preventDefault();
+        let data = APIHelper.serializeObj($('#ModalCreate .modal-content form'));
+        data.BlogDetail = blogCategory.editor.getData();
+        if (!Array.isArray(data.IDTag)) {
+            if (isFinite(data.IDTag))
+                data.IDTag = [Number(data.IDTag)];
+            else
+                data.IDTag = [data.IDTag];
+        }
+        if (!Array.isArray(data.IDCategory)) {
+            if (isFinite(data.IDCategory))
+                data.IDCategory = [Number(data.IDCategory)];
+            else
+                data.IDCategory = [data.IDCategory];
+        }
+        if (data.ID != '' && data.ID != '0') {
+            data.ID = Number(data.ID);
+            blogCategory.edit(data).done((data) => {
+                if (data != null && data.obj != null && data.obj.id > 0) {
+                    alert('Cập nhật thành công');
+                    $("#ModalCreate").modal('hide');
+                }
+                else {
+                    alert('Cập nhật thất bại');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+        else {
+            blogCategory.insert(data).done((data) => {
+                if (data != null && data.obj != null && data.obj.id > 0) {
+                    alert('Cập nhật thành công');
+                    $("#ModalCreate").modal('hide');
+                }
+                else {
+                    alert('Cập nhật thất bại');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+        
+    },
+    refreshEvent: function () {
+        $('.edit-dialog').unbind('click').click(blogCategory.evtShowDialog);
+        $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
+        $('.delete-dialog').unbind('click').click(function (evnt) {
+            evnt.stopPropagation();
+            let dataKey = $(this).attr('data-key');
+            dataKey = dataKey == null ? '' : dataKey;
+            blogCategory.delete(dataKey).done(data => {
+                if (data.codeError != '00') {
+                    alert(data.strError);
+                }
+                else {
+                    blogCategory.getAll().done(data => { blogCategory.refreshTable(data); });
+                }
+            });
+        });
+    },
+};
 
+let menuCategory = {
+    classTreeView: 'tree-view',
+    idContextMenuTreeView: 'contextMenuTreeView',
+    categories: [],
+    //Get Menu Folder
+    getAllTreeView: function () {
+        $.ajax({
+            url: APIHelper.host + "/Blogs/Category/GetAll",
+            type: 'GET',
+        }).done((data) => {
+            menuCategory.categories = [];
+            if (data != null && data.listObj != null) {
+                menuCategory.categories = data.listObj;
+                menuCategory.refreshTreeView(menuCategory.categories);
+            }
+        }).catch((err) => {
+            menuCategory.categories = [];
+        });
+    },
+    getAllByIDParent: function (idCategory) {
+        return $.ajax({
+            url: APIHelper.host + "/Blogs/Category/GetAllByIDParent",
+            type: 'GET',
+            data: { IDParent: idCategory },
+        });
+    },
+    refreshEvent: function () {
+        //Sự kiện collapse_expand treeview
+        $('.tree-view li').unbind('click').click(menuCategory.isCollapseExpand);
 
+        $('.section-treeview .tree-view ul li').unbind('dblclick').dblclick(function (evnt) {
+            evnt.stopPropagation();
+            $('.section-treeview .tree-view ul li').removeClass('active');
+            $(this).addClass('active');
+            var dataKey = this.getAttribute("data-key");
+            if (dataKey != null && dataKey != '') {
+                blogCategory.getAllBlogByCategory(dataKey).done(data => { blogCategory.refreshTable(data); });
+            }
+        });
+    },
+    refreshTreeView: function () {
+        let $treeView = $('.' + menuCategory.classTreeView + '>ul');
+        $treeView.empty();
+        let indexFolder = 0;
+        let temFolder = {};
+
+        for (indexFolder = 0; indexFolder < menuCategory.categories.length; indexFolder++) {
+            if (menuCategory.categories[indexFolder].idParent == 0) {
+                temFolder = menuCategory.categories[indexFolder];
+                let $liTreeView = $('<li></li>');
+                $liTreeView.attr('data-key', temFolder.id);
+                $liTreeView.html(temFolder.name);
+                $treeView.append($liTreeView);
+                menuCategory.addChildTreeView(menuCategory.categories, temFolder, $liTreeView);
+            }
+        }
+        menuCategory.refreshEvent();
+    },
+    addChildTreeView: function (data, parent, $liParent) {
+        let $ulChild = $("<ul></ul>");
+        let isChild = false;
+        let indexChildFolder = 0;
+        let temChildFolder = {};
+
+        for (indexChildFolder = 0; indexChildFolder < data.length; indexChildFolder++) {
+            if (data[indexChildFolder].idParent == parent.id) {
+                isChild = true;
+                temChildFolder = data[indexChildFolder];
+
+                let $liChild = $('<li></li>');
+                $liChild.attr('data-key', temChildFolder.id);
+                $liChild.html(temChildFolder.name);
+                $ulChild.append($liChild);
+                menuCategory.addChildTreeView(data, temChildFolder, $liChild);
+            }
+        }
+        if (isChild) {
+            if (parent.levelChild >= 2)
+                $liParent.addClass("expand-node");//collapse
+            else
+                $liParent.addClass("expand-node");
+
+            $liParent.append($ulChild);
+        }
+    },
+    isCollapseExpand: function (evnt) {
+        evnt.stopPropagation();
+        let vclass = this.getAttribute('class') + '';
+        if (vclass.indexOf('expand-node') >= 0)
+            $(this).removeClass("expand-node").addClass("collapse-node");
+        else if (vclass.indexOf('collapse-node') >= 0)
+            $(this).removeClass("collapse-node").addClass("expand-node");
+    },
+    getKeyActiveTreeView: function () {
+        let $obj = $('.section-treeview .tree-view ul li.active');
+        let itemValue = "";
+        if ($obj[0] != null)
+            itemValue = $obj[0].outerText.split('\n')[0];
+
+        return {
+            key: $obj.attr('data-key'),
+            value: itemValue
+        };
+    },
+    init: function () {
+        menuCategory.getAllTreeView();
+    }
 };

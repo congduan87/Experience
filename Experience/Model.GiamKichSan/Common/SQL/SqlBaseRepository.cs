@@ -13,13 +13,18 @@ namespace Model.GiamKichSan.Common.SQL
     public class SqlBaseRepository
     {
         #region DBTransaction
-        private static SqlConnection connection;
         internal string connectionString { get; set; }
         private bool m_Disposed = false;
+        private BaseSQLConnection baseSQLConnection { get; set; }
 
         protected SqlBaseRepository(string connectionString)
         {
             this.connectionString = connectionString;
+            this.baseSQLConnection = new BaseSQLConnection(this.connectionString);
+        }
+        protected SqlBaseRepository(BaseSQLConnection baseSQLConnection)
+        {
+            this.baseSQLConnection = baseSQLConnection;
         }
 
         ~SqlBaseRepository()
@@ -47,20 +52,10 @@ namespace Model.GiamKichSan.Common.SQL
             }
         }
 
-        protected SqlConnection DbConnection
-        {
-            get
-            {
-                if (connection == null) connection = new SqlConnection(connectionString);
-                if (connection.State == ConnectionState.Closed) connection.Open();
-                return connection;
-            }
-        }
-
         protected ResObject<bool> ExecuteWithTransaction(Func<IDbTransaction, bool> func)
         {
             ResObject<bool> output = new ResObject<bool>() { obj = false };
-            using (IDbTransaction dbTransaction = DbConnection.BeginTransaction())
+            using (IDbTransaction dbTransaction = baseSQLConnection.DbConnection.BeginTransaction())
             {
                 try
                 {
@@ -119,7 +114,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandO(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -136,7 +131,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandD(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -152,7 +147,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandO(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
                 DataTable dt = new DataTable();
@@ -171,7 +166,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandD(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -191,7 +186,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandO(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -210,7 +205,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandD(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -229,7 +224,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandO(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -246,7 +241,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(commandText, DbConnection);
+                var cmd = new SqlCommand(commandText, baseSQLConnection.DbConnection);
                 CombiCommandD(cmd, paramsValue);
                 cmd.CommandType = CommandType.Text;
 
@@ -263,7 +258,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(procName, DbConnection);
+                var cmd = new SqlCommand(procName, baseSQLConnection.DbConnection);
                 CombiCommandO(cmd, paramsValue);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -282,7 +277,7 @@ namespace Model.GiamKichSan.Common.SQL
         {
             try
             {
-                var cmd = new SqlCommand(procName, DbConnection);
+                var cmd = new SqlCommand(procName, baseSQLConnection.DbConnection);
                 CombiCommandD(cmd, paramsValue);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -310,7 +305,7 @@ namespace Model.GiamKichSan.Common.SQL
                 return "ORDER BY {0} OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY";
             }
         }
-        protected string GetTableName()
+        public string GetTableName()
         {
             string tableName = typeof(T).Name;
             var customAttributes = typeof(T).GetCustomAttributes(typeof(TableAttribute), false);
@@ -323,6 +318,9 @@ namespace Model.GiamKichSan.Common.SQL
         protected readonly string paramPrefix = "@";
 
         public SqlBaseRepository(string connectionString) : base(connectionString)
+        {
+        }
+        public SqlBaseRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
 
@@ -393,8 +391,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_Insert: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -439,8 +435,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_Insert: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -484,8 +478,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_Update: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -526,8 +518,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_UpdateWhere: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -549,8 +539,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_Delete: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -581,8 +569,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_DeleteWhere: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -609,8 +595,6 @@ namespace Model.GiamKichSan.Common.SQL
                 output.codeError = "99";
                 output.strError = string.Format("SqlBaseRepository_ExistWhere: ", ex.ToString());
             }
-
-            DbConnection.Close();
             return output;
         }
 
@@ -647,8 +631,8 @@ namespace Model.GiamKichSan.Common.SQL
                 string clause = string.Empty;
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
 
-                if(conditions != null)
-                clause = " WHERE " + conditions.Body.GetKeyValue(parameters, paramPrefix);
+                if (conditions != null)
+                    clause = " WHERE " + conditions.Body.GetKeyValue(parameters, paramPrefix);
 
                 string commandText = "SELECT * FROM " + tableName + clause + " \n " + string.Format(_SkipTake, orderby, pageSize * pageIndex, pageSize * (pageIndex + 1));
 

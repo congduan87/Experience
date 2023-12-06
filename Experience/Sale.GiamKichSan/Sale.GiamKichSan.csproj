@@ -12,8 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Blogs\Pages\BlogCategory\Index.cshtml" />
+    <None Include="Areas\Blogs\Pages\Categories\Index.cshtml" />
     <None Include="Areas\Blogs\Pages\Index.cshtml" />
     <None Include="Areas\Blogs\Pages\Shared\_Layout.cshtml" />
+    <None Include="Areas\Blogs\Pages\Tags\Index.cshtml" />
   </ItemGroup>
 
 </Project>

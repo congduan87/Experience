@@ -1,0 +1,90 @@
+﻿/*------------Danh mục---------------------------*/
+.section-treeview {
+    background-color: #f2f3f5;
+}
+
+    .section-treeview * {
+        margin: 0;
+    }
+
+    .section-treeview ul {
+        list-style: none;
+    }
+
+    .section-treeview .title {
+        color: #1f1f1f;
+        font-size: 38px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .section-treeview ul.sub-title li {
+        float: right;
+        margin-left: 10px;
+    }
+
+        .section-treeview ul.sub-title li:first-child {
+            float: left;
+        }
+
+    .section-treeview .lead-text {
+        font-size: 19px;
+        margin-bottom: 40px;
+    }
+
+
+    /*------------Tree-View---------------------------*/
+    .section-treeview .tree-view {
+        float: left;
+        margin-bottom: 20px;
+        width: 350px;
+    }
+
+        .section-treeview .tree-view ul li {
+            color: black;
+            transition: 0.3s background-color;
+        }
+
+            .section-treeview .tree-view ul li:hover {
+                color: #18ccca;
+            }
+
+            .section-treeview .tree-view ul li.active {
+                color: #18ccca;
+            }
+
+        .section-treeview .tree-view li.collapse-node > ul {
+            display: none;
+        }
+
+        .section-treeview .tree-view li.collapse-node::before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            content: "\f056";
+            font-family: 'FontAwesome';
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .section-treeview .tree-view li.expand-node > ul {
+            display: block;
+        }
+
+        .section-treeview .tree-view li.expand-node::before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            content: "\f067";
+            font-family: 'FontAwesome';
+            font-weight: 900;
+            font-size: 20px;
+        }

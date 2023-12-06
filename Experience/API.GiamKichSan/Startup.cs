@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Model.GiamKichSan.Common.SQL;
 
 namespace API.GiamKichSan
 {
@@ -44,6 +45,7 @@ namespace API.GiamKichSan
             });
 
             SessionGlobal.DefaultConnectString = Configuration.GetConnectionString("DefaultDbContext");
+            services.AddSingleton<BaseSQLConnection>(new BaseSQLConnection(SessionGlobal.DefaultConnectString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

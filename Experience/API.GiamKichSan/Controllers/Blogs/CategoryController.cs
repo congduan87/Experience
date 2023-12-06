@@ -1,6 +1,7 @@
 ﻿using API.GiamKichSan.Common;
 using API.GiamKichSan.Models.Blogs;
 using Microsoft.AspNetCore.Mvc;
+using Model.GiamKichSan.Common.SQL;
 using Model.GiamKichSan.Data.Blogs;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.Blogs;
@@ -12,9 +13,9 @@ namespace API.GiamKichSan.Controllers.Blogs
     public class CategoryController : ControllerBase
     {
         private CategoryRepository itemRepository { get; set; }
-        public CategoryController()
+        public CategoryController(BaseSQLConnection baseSQLConnection)
         {
-            itemRepository = new CategoryRepository(SessionGlobal.DefaultConnectString);
+            itemRepository = new CategoryRepository(baseSQLConnection);
         }
 
         [HttpGet]
@@ -22,6 +23,13 @@ namespace API.GiamKichSan.Controllers.Blogs
         public ResObject<Category_Entity> GetAll()
         {
             return itemRepository.GetAll();
+        }
+
+        [HttpGet]
+        [Route("GetAllByIDParent")]
+        public ResObject<Category_Entity> GetAllByIDParent(long IDParent)
+        {
+            return itemRepository.GetAll(x=>x.IDParent.Equals(IDParent));
         }
 
         [HttpGet]

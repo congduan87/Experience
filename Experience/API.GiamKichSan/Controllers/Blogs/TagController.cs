@@ -1,6 +1,7 @@
 ﻿using API.GiamKichSan.Common;
 using API.GiamKichSan.Models.Blogs;
 using Microsoft.AspNetCore.Mvc;
+using Model.GiamKichSan.Common.SQL;
 using Model.GiamKichSan.Data.Blogs;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.Blogs;
@@ -12,9 +13,9 @@ namespace API.GiamKichSan.Controllers.Blogs
     public class TagController : ControllerBase
     {
         private TagRepository itemRepository { get; set; }
-        public TagController()
+        public TagController(BaseSQLConnection baseSQLConnection)
         {
-            itemRepository = new TagRepository(SessionGlobal.DefaultConnectString);
+            itemRepository = new TagRepository(baseSQLConnection);
         }
 
         [HttpGet]

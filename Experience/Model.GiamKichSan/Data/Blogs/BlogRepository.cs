@@ -10,10 +10,17 @@ namespace Model.GiamKichSan.Data.Blogs
 {
     public class BlogRepository : SqlBaseRepository<Blog_Entity>
     {
-        private BlogDetailRepository blogDetailRepository { get; set; }
-        public BlogRepository(string connectionString) : base(connectionString)
+        public CategoryRepository categoryRepository { get; set; }
+        public BlogDetailRepository blogDetailRepository { get; set; }
+        public BlogTagRepository blogTagRepository { get; set; }
+        public BlogCategoryRepository blogCategoryRepository { get; set; }
+
+        public BlogRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
-            blogDetailRepository = new BlogDetailRepository(connectionString);
+            categoryRepository = new CategoryRepository(baseSQLConnection);
+            blogDetailRepository = new BlogDetailRepository(baseSQLConnection);
+            blogTagRepository = new BlogTagRepository(baseSQLConnection);
+            blogCategoryRepository = new BlogCategoryRepository(baseSQLConnection);
         }
 
         public ResObject<bool> Delete(Blog_Entity item)
@@ -100,7 +107,7 @@ namespace Model.GiamKichSan.Data.Blogs
             }
             return resOutput;
         }
-        public ResObject<Blog_Entity> Edit(Blog_Entity item, List<BlogDetail_Entity> details)
+        public ResObject<Blog_Entity> Edit(Blog_Entity item, List<BlogDetail_Entity> details, List<BlogCategory_Entity> categories, List<BlogTag_Entity> tags)
         {
             var resOutput = new ResObject<Blog_Entity>();
             var resItem = base.GetById<Blog_Entity>(x => x.ID.Equals(item.ID));
@@ -114,18 +121,43 @@ namespace Model.GiamKichSan.Data.Blogs
                 resOutput = base.Insert(item);
                 if (resOutput.isValidate() && resOutput.obj.ID > 0)
                 {
-                    var resDetail = new ResObject<BlogDetail_Entity>();
                     foreach (var item1 in details)
                     {
                         item1.IDBlog = resOutput.obj.ID;
                         item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
                         item1.Version = resOutput.obj.Version;
 
-                        resDetail = blogDetailRepository.Insert(item1);
+                        var resDetail = blogDetailRepository.Insert(item1);
                         if (!resDetail.isValidate())
                         {
                             resOutput.codeError = resDetail.codeError;
                             resOutput.strError = resDetail.strError;
+                            return resOutput;
+                        }
+                    }
+
+                    foreach (var item1 in categories)
+                    {
+                        item1.IDBlog = resOutput.obj.ID;
+                        item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
+                        var resCategory = blogCategoryRepository.Update(item1);
+                        if (!resCategory.isValidate())
+                        {
+                            resOutput.codeError = resCategory.codeError;
+                            resOutput.strError = resCategory.strError;
+                            return resOutput;
+                        }
+                    }
+
+                    foreach (var item1 in tags)
+                    {
+                        item1.IDBlog = resOutput.obj.ID;
+                        item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
+                        var resTag = blogTagRepository.Update(item1);
+                        if (!resTag.isValidate())
+                        {
+                            resOutput.codeError = resTag.codeError;
+                            resOutput.strError = resTag.strError;
                             return resOutput;
                         }
                     }
@@ -144,14 +176,27 @@ namespace Model.GiamKichSan.Data.Blogs
             var strQuerry = $@"SELECT A.* FROM {base.GetTableName()} A
                 INNER JOIN (SELECT ID, MAX([VERSION]) AS [VERSION] FROM {base.GetTableName()} GROUP BY ID) B
                 ON A.ID = B.ID";
-            base.GetDataTable(strQuerry, new object[] { }).ToList<Blog_Entity>();
-            return base.GetByFilter<Blog_Entity>(func, nameof(Blog_Entity.ID), int.MaxValue);
+            return new ResObject<Blog_Entity>() { listObj = base.GetDataTable(strQuerry, new object[] { }).ToList<Blog_Entity>() };
         }
+
+        public ResObject<Blog_Entity> GetAllByIDCategory(long iDCatetory)
+        {
+            var strQuerry = $@"SELECT A.* FROM {base.GetTableName()} A
+                INNER JOIN (
+                    SELECT B1.ID, MAX(B1.[VERSION]) AS [VERSION] FROM {base.GetTableName()} B1
+                    INNER JOIN {blogCategoryRepository.GetTableName()} B2 ON B1.ID = B2.IDBlog
+                    WHERE B2.IDCategory = {iDCatetory}
+                    GROUP BY B1.ID
+                    ) B
+                ON A.ID = B.ID";
+            return new ResObject<Blog_Entity>() { listObj = base.GetDataTable(strQuerry, new object[] {  }).ToList<Blog_Entity>() };
+        }
+
         public ResObject<Blog_Entity> GetByID(long ID)
         {
             return base.GetById<Blog_Entity>(x => x.ID.Equals(ID));
         }
-        public ResObject<Blog_Entity> Insert(Blog_Entity item, List<BlogDetail_Entity> details)
+        public ResObject<Blog_Entity> Insert(Blog_Entity item, List<BlogDetail_Entity> details, List<BlogCategory_Entity> categories, List<BlogTag_Entity>tags)
         {
             item.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
             item.IsActive = CustEnum.IsActive;
@@ -160,14 +205,13 @@ namespace Model.GiamKichSan.Data.Blogs
             var resOutput = base.Insert(item);
             if (resOutput.isValidate() && resOutput.obj.ID > 0)
             {
-                var resDetail = new ResObject<BlogDetail_Entity>();
                 foreach (var item1 in details)
                 {
                     item1.IDBlog = resOutput.obj.ID;
                     item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
                     item1.Version = resOutput.obj.Version;
 
-                    resDetail = blogDetailRepository.Insert(item1);
+                    var resDetail = blogDetailRepository.Insert(item1);
                     if (!resDetail.isValidate())
                     {
                         resOutput.codeError = resDetail.codeError;
@@ -175,6 +219,33 @@ namespace Model.GiamKichSan.Data.Blogs
                         return resOutput;
                     }
                 }
+
+                foreach (var item1 in categories)
+                {
+                    item1.IDBlog = resOutput.obj.ID;
+                    item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
+                    var resCategory = blogCategoryRepository.Update(item1);
+                    if (!resCategory.isValidate())
+                    {
+                        resOutput.codeError = resCategory.codeError;
+                        resOutput.strError = resCategory.strError;
+                        return resOutput;
+                    }
+                }
+
+                foreach (var item1 in tags)
+                {
+                    item1.IDBlog = resOutput.obj.ID;
+                    item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
+                    var resTag = blogTagRepository.Update(item1);
+                    if (!resTag.isValidate())
+                    {
+                        resOutput.codeError = resTag.codeError;
+                        resOutput.strError = resTag.strError;
+                        return resOutput;
+                    }
+                }
+
             }
             return resOutput;
         }
