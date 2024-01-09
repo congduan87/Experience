@@ -15,6 +15,9 @@ namespace API.GiamKichSan.Models.Blogs
     }
     public class Blog_Insert
     {
+        [Display(Name = "Mã Blog")]
+        [StringLength(256)]
+        public string BlogCode { get; set; }
         [Display(Name = "Ngày đăng")]
         public DateTime DateShow { get; set; }
         [StringLength(200)]

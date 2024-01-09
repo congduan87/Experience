@@ -7,7 +7,6 @@ namespace API.GiamKichSan.Common
 {
     public class SessionGlobal
     {
-        public static string DefaultConnectString { get; set; }
         public static string IDUserLogin { get; set; } = "1";
         public static string ContentRoot { get; set; }
     }

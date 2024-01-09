@@ -1,5 +1,6 @@
 ﻿using API.GiamKichSan.Common;
 using Microsoft.AspNetCore.Mvc;
+using Model.GiamKichSan.Common.SQL;
 using Model.GiamKichSan.Data.MyIPs;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.MyIPs;
@@ -13,9 +14,9 @@ namespace API.GiamKichSan.Controllers.MyIPs
     public class HomeAddressController : ControllerBase
     {
         private HomeAddressRepository controllerRepository { get; set; }
-        public HomeAddressController()
+        public HomeAddressController(BaseSQLConnection baseSQLConnection)
         {
-            controllerRepository = new HomeAddressRepository(SessionGlobal.DefaultConnectString);
+            controllerRepository = new HomeAddressRepository(baseSQLConnection);
         }
 
         [HttpGet]

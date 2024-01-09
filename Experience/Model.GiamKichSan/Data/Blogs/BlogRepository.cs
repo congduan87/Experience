@@ -113,10 +113,14 @@ namespace Model.GiamKichSan.Data.Blogs
             var resItem = base.GetById<Blog_Entity>(x => x.ID.Equals(item.ID));
             if (resItem != null && resItem.isValidate() && resItem.obj != null && resItem.obj.ID > 0)
             {
+                resItem.obj.IsActive = "N";
+                base.Update(resItem.obj, x => x.ID == resItem.obj.ID);
+
                 item.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
                 item.IsActive = CustEnum.IsActive;
                 item.IsDelete = CustEnum.IsNotDelete;
                 item.Version = resItem.obj.Version + 1;
+                item.BlogCode = resItem.obj.BlogCode;
 
                 resOutput = base.Insert(item);
                 if (resOutput.isValidate() && resOutput.obj.ID > 0)
@@ -174,34 +178,33 @@ namespace Model.GiamKichSan.Data.Blogs
         public ResObject<Blog_Entity> GetAll(Expression<Func<Blog_Entity, bool>> func = null)
         {
             var strQuerry = $@"SELECT A.* FROM {base.GetTableName()} A
-                INNER JOIN (SELECT ID, MAX([VERSION]) AS [VERSION] FROM {base.GetTableName()} GROUP BY ID) B
-                ON A.ID = B.ID";
+                INNER JOIN (SELECT BlogCode, MAX([VERSION]) AS [VERSION] FROM {base.GetTableName()} GROUP BY ID) B
+                ON A.BlogCode = B.BlogCode AND A.[VERSION] = B.[VERSION]";
             return new ResObject<Blog_Entity>() { listObj = base.GetDataTable(strQuerry, new object[] { }).ToList<Blog_Entity>() };
         }
-
         public ResObject<Blog_Entity> GetAllByIDCategory(long iDCatetory)
         {
             var strQuerry = $@"SELECT A.* FROM {base.GetTableName()} A
                 INNER JOIN (
-                    SELECT B1.ID, MAX(B1.[VERSION]) AS [VERSION] FROM {base.GetTableName()} B1
+                    SELECT B1.BlogCode, MAX(B1.[VERSION]) AS [VERSION] FROM {base.GetTableName()} B1
                     INNER JOIN {blogCategoryRepository.GetTableName()} B2 ON B1.ID = B2.IDBlog
                     WHERE B2.IDCategory = {iDCatetory}
-                    GROUP BY B1.ID
+                    GROUP BY B1.BlogCode
                     ) B
-                ON A.ID = B.ID";
-            return new ResObject<Blog_Entity>() { listObj = base.GetDataTable(strQuerry, new object[] {  }).ToList<Blog_Entity>() };
+                ON A.BlogCode = B.BlogCode AND A.[VERSION] = B.[VERSION]";
+            return new ResObject<Blog_Entity>() { listObj = base.GetDataTable(strQuerry, new object[] { }).ToList<Blog_Entity>() };
         }
-
         public ResObject<Blog_Entity> GetByID(long ID)
         {
             return base.GetById<Blog_Entity>(x => x.ID.Equals(ID));
         }
-        public ResObject<Blog_Entity> Insert(Blog_Entity item, List<BlogDetail_Entity> details, List<BlogCategory_Entity> categories, List<BlogTag_Entity>tags)
+        public ResObject<Blog_Entity> Insert(Blog_Entity item, List<BlogDetail_Entity> details, List<BlogCategory_Entity> categories, List<BlogTag_Entity> tags)
         {
             item.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
             item.IsActive = CustEnum.IsActive;
             item.IsDelete = CustEnum.IsNotDelete;
             item.Version = 1;
+            item.BlogCode = Guid.NewGuid().ToString();
             var resOutput = base.Insert(item);
             if (resOutput.isValidate() && resOutput.obj.ID > 0)
             {
@@ -210,7 +213,6 @@ namespace Model.GiamKichSan.Data.Blogs
                     item1.IDBlog = resOutput.obj.ID;
                     item1.DateCreate = DateTime.Now.ToString(CustEnum.FormatDateTime);
                     item1.Version = resOutput.obj.Version;
-
                     var resDetail = blogDetailRepository.Insert(item1);
                     if (!resDetail.isValidate())
                     {

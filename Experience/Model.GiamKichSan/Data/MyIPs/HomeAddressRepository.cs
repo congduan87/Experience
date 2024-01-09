@@ -8,7 +8,7 @@ namespace Model.GiamKichSan.Data.MyIPs
 {
     public class HomeAddressRepository : SqlBaseRepository<HomeAddress_Entity>, IData<HomeAddress_Entity, HomeAddress_Entity>
     {
-        public HomeAddressRepository(string connectionString) : base(connectionString)
+        public HomeAddressRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
 

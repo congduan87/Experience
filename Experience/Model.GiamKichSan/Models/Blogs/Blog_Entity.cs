@@ -9,6 +9,8 @@ namespace Model.GiamKichSan.Models.Blogs
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long ID { get; set; }
+        [StringLength(256)]
+        public string BlogCode { get; set; }
         [StringLength(20)]
         public string DateShow { get; set; }
         [StringLength(200)]

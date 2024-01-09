@@ -1,11 +1,10 @@
 using API.GiamKichSan.Common;
+using API.GiamKichSan.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Model.GiamKichSan.Common.SQL;
 
 namespace API.GiamKichSan
 {
@@ -21,31 +20,7 @@ namespace API.GiamKichSan
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            services.AddControllersWithViews();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.GiamKichSan", Version = "v1" });
-            });
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "AllowOrigin",
-                    builder =>
-                    {
-                        builder.WithOrigins("*",
-                            "http://giamkichsan.com",
-                            "https://myip.giamkichsan.com",
-                            "http://happywedding.giamkichsan.com",
-                            "http://search.giamkichsan.com",
-                            "http://localhost:42037")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                    });
-            });
-
-            SessionGlobal.DefaultConnectString = Configuration.GetConnectionString("DefaultDbContext");
-            services.AddSingleton<BaseSQLConnection>(new BaseSQLConnection(SessionGlobal.DefaultConnectString));
+            services.CustConfigureServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,16 +33,7 @@ namespace API.GiamKichSan
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API.GiamKichSan v1"));
             }
-            app.UseCors("AllowOrigin");
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=UploadFile}/{action=Index}/{id?}");
-            });
+            app.CustConfigure();
         }
     }
 }

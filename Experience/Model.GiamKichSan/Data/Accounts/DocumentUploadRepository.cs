@@ -1,5 +1,4 @@
 ﻿using Model.GiamKichSan.Common.SQL;
-using Model.GiamKichSan.IData.IBase;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.Accounts;
 using System;
@@ -9,7 +8,7 @@ namespace Model.GiamKichSan.Data.Accounts
 {
     public class DocumentUploadRepository : SqlBaseRepository<DocumentUpload_Entity>
     {
-        public DocumentUploadRepository(string connectionString) : base(connectionString)
+        public DocumentUploadRepository(BaseSQLConnection baseSQLConnection) : base(baseSQLConnection)
         {
         }
 

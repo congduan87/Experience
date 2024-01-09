@@ -1,6 +1,7 @@
 ﻿using API.GiamKichSan.Common;
 using API.GiamKichSan.Models;
 using Microsoft.AspNetCore.Mvc;
+using Model.GiamKichSan.Common.SQL;
 using Model.GiamKichSan.Data.Accounts;
 using Model.GiamKichSan.Models;
 using Model.GiamKichSan.Models.Accounts;
@@ -13,9 +14,9 @@ namespace API.GiamKichSan.Controllers.Accounts
     public class FolderUploadController : ControllerBase
     {
         private DocumentUploadRepository controllerRepository { get; set; }
-        public FolderUploadController()
+        public FolderUploadController(BaseSQLConnection baseSQLConnection)
         {
-            controllerRepository = new DocumentUploadRepository(SessionGlobal.DefaultConnectString);
+            controllerRepository = new DocumentUploadRepository(baseSQLConnection);
         }
 
         [HttpGet]
