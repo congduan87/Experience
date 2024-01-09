@@ -204,70 +204,81 @@ let blogCategory = {
                     $select.append($option);
                 }
             }
-        }).catch((error) => {
-            console.log(error);
-        });
-        blogCategory.getAllTag().done((data) => {
-            if (data != null && data.listObj != null) {
-                let option = '';
-                let $select = $('select[name=IDTag]');
-                $select.empty();                
-                for (var i = 0; i < data.listObj.length; i++) {
-                    $option = '<option value="' + data.listObj[i].id + '">' + data.listObj[i].name + '</option>';
-                    $select.append($option);
+            blogCategory.getAllTag().done((data) => {
+                if (data != null && data.listObj != null) {
+                    let option = '';
+                    let $select = $('select[name=IDTag]');
+                    $select.empty();
+                    for (var i = 0; i < data.listObj.length; i++) {
+                        $option = '<option value="' + data.listObj[i].id + '">' + data.listObj[i].name + '</option>';
+                        $select.append($option);
+                    }
                 }
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-        if (dataKeyCurrent != '') {
-            blogCategory.getByID(dataKeyCurrent).done(data => {
-                if (data != null && data.obj != null) {
-                    if (data.obj.blog != null) {
-                        $model.find('input[name="ID"]').val(data.obj.blog.id);
-                        $model.find('input[name="DateShow"]').val(data.obj.blog.dateShow);
-                        $model.find('input[name="Title"]').val(data.obj.blog.title);
-                        $model.find('textarea[name="Description"]').val(data.obj.blog.description);
-                        $model.find('input[name="ImageAvatar"]').val(data.obj.blog.imageAvatar);
-                    }
+                if (dataKeyCurrent != '') {
+                    blogCategory.getByID(dataKeyCurrent).done(data => {
+                        if (data != null && data.obj != null) {
+                            if (data.obj.blog != null) {
+                                $model.find('input[name="ID"]').val(data.obj.blog.id);
+                                $model.find('input[name="BlogCode"]').val(data.obj.blog.blogCode);
+                                $model.find('input[name="DateShow"]').val(data.obj.blog.dateShow.substring(0, 10));
+                                $model.find('input[name="Title"]').val(data.obj.blog.title);
+                                $model.find('textarea[name="Description"]').val(data.obj.blog.description);
+                                $model.find('input[name="ImageAvatar"]').val(data.obj.blog.imageAvatar);
+                            }
 
-                    if (data.obj.blogCategories != null && data.obj.blogCategories.length > 0) {
-                        let idcategories = [];
-                        data.obj.blogCategories.forEach(element => idcategories.push(element.idCategory));
-                        $('select[name=IDCategory]').val(idcategories).trigger('change');
-                    }
-                    if (data.obj.blogTags != null && data.obj.blogTags.length > 0) {
-                        let idTags = [];
-                        data.obj.blogTags.forEach(element => idTags.push(element.idTag));
-                        $('select[name=IDTag]').val(idTags).trigger('change');
-                    }
-                    if (data.obj.blogDetails != null && data.obj.blogDetails.length > 0) {
-                        let details = '';
-                        data.obj.blogDetails.forEach(element => { details += element.description; });
-                        blogCategory.editor.setData(details);
-                    }
+                            if (data.obj.blogCategories != null && data.obj.blogCategories.length > 0) {
+                                let idcategories = [];
+                                data.obj.blogCategories.forEach(element => idcategories.push(element.idCategory));
+                                $('select[name=IDCategory]').val(idcategories).trigger('change');
+                            }
+                            if (data.obj.blogTags != null && data.obj.blogTags.length > 0) {
+                                let idTags = [];
+                                data.obj.blogTags.forEach(element => idTags.push(element.idTag));
+                                $('select[name=IDTag]').val(idTags).trigger('change');
+                            }
+                            if (data.obj.blogDetails != null && data.obj.blogDetails.length > 0) {
+                                let details = '';
+                                data.obj.blogDetails.forEach(element => { details += element.description; });
+                                blogCategory.editor.setData(details);
+                            }
+                            document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
+                            document.getElementById('ModalButton').click();
+                            $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
+                        }
+                        else {
+                            $model.find('input[name="ID"]').val("0");
+                            $model.find('input[name="BlogCode"]').val('');
+                            $model.find('input[name="DateShow"]').val('');
+                            $model.find('input[name="Title"]').val('');
+                            $model.find('textarea[name="Description"]').val('');
+                            $model.find('input[name="ImageAvatar"]').val('');
+                            blogCategory.editor.setData('');
 
-                    
+                            document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
+                            document.getElementById('ModalButton').click();
+                            $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
+                        }
+                    });
+                }
+                else {
+                    $model.find('input[name="ID"]').val("0");
+                    $model.find('input[name="BlogCode"]').val('');
+                    $model.find('input[name="DateShow"]').val('');
+                    $model.find('input[name="Title"]').val('');
+                    $model.find('textarea[name="Description"]').val('');
+                    $model.find('input[name="ImageAvatar"]').val('');
+                    blogCategory.editor.setData('');
 
                     document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
                     document.getElementById('ModalButton').click();
                     $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
                 }
+            }).catch((error) => {
+                console.log(error);
             });
-
-            return;
-        }
-        else {
-            $model.find('input[name="ID"]').val("0");
-            $model.find('input[name="DateShow"]').val('');
-            $model.find('input[name="Title"]').val('');
-            $model.find('input[name="Description"]').val('');
-            $model.find('input[name="ImageAvatar"]').val('');
-
-            document.getElementById('ModalButton').setAttribute('data-target', '#ModalCreate');
-            document.getElementById('ModalButton').click();
-            $('.save-blog').unbind('click').click(blogCategory.evtUpdateBlog);
-        }
+        }).catch((error) => {
+            console.log(error);
+        });
     },
     refreshTable: function (data) {
         $("#tbTable").empty();
@@ -367,7 +378,7 @@ let blogCategory = {
                 console.log(error);
             });
         }
-        
+
     },
     refreshEvent: function () {
         $('.edit-dialog').unbind('click').click(blogCategory.evtShowDialog);
